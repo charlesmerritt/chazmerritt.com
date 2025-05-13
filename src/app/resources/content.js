@@ -6,9 +6,9 @@ const person = {
   get name() {
     return `${this.firstName} ${this.lastName}`;
   },
-  role: "ML Researcher",
+  role: "ML Research Assistant",
   avatar: "/images/avatar.jpg",
-  location: "America/New_York", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
+  location: "US/Eastern", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
   languages: ["English", "Spanish"], // optional: Leave the array empty if you don't want to display languages
 };
 
@@ -28,12 +28,12 @@ const social = [
   {
     name: "GitHub",
     icon: "github",
-    link: "https://github.com/once-ui-system/nextjs-starter",
+    link: "https://github.com/charlesmerritt",
   },
   {
     name: "LinkedIn",
     icon: "linkedin",
-    link: "https://www.linkedin.com/company/once-ui/",
+    link: "https://www.linkedin.com/in/chaz-merritt/",
   },
   {
     name: "Email",
@@ -46,11 +46,11 @@ const home = {
   label: "Home",
   title: `${person.name}'s Portfolio`,
   description: `Portfolio website showcasing my work as a ${person.role}`,
-  headline: <>AI/ML Researcher</>,
+  headline: <>Research Assistant @ the <InlineCode>University of Georgia</InlineCode></>,
   subline: (
     <>
-      I'm Chaz, a researcher at the <InlineCode>University of Georgia</InlineCode> where I develop
-      solutions in the forestry space. After hours, I build my own projects.
+      I'm Chaz I am a student dedicated to developing solutions in the forestry space.
+      After hours, I build web products and automation services for artists and small business owners.
     </>
   ),
 };
@@ -68,7 +68,7 @@ const about = {
   },
   calendar: {
     display: true,
-    link: "https://cal.com",
+    link: "https://outlook.office365.com/owa/calendar/WebsiteInterest@groups.uga.edu/bookings/",
   },
   intro: {
     display: true,
@@ -89,20 +89,20 @@ const about = {
       {
         company: "University of Georgia",
         timeframe: "2025 - Present",
-        role: "Research Professional",
+        role: "Research Assistant",
         achievements: [
           <>
-	    Presented at multiple conferences.
+	    Presented research at 3 conferences: SOFORGIS '24, Artificial Intelligence and Other Advanced Technology Solutions for Eastern United States Forestry '25, and Society of American Foresters Conference '25 (Forthcoming).
           </>,
           <>
-	    Published several papers.
+	    Worked on 3 forthcoming publications: Special Issue Review on AI & Forestry, ViT-GNN for Wildfire Prediction, and my thesis titled 'Harnessing Reinforcement Learning for Forest Growth Modeling Under Uncertainty'.
           </>,
         ],
         images: [
           // optional: leave the array empty if you don't want to display images
           {
-            src: "/images/projects/project-01/cover-01.jpg",
-            alt: "Once UI Project",
+            src: "/images/projects/aidvisor/aidvisor_cover.png",
+            alt: "AIDVISOR, my New Media Capstone Project.",
             width: 16,
             height: 9,
           },
@@ -129,13 +129,14 @@ const about = {
     title: "Studies",
     institutions: [
       {
-        name: "University of Georgia, MS in Artificial Intelligence",
+        name: "University of Georgia, MS in Artificial Intelligence, 2025",
         description: <>Completed my thesis titled 'Harnessing Reinforcement Learning 
 	for Forest Growth Modeling Under Uncertainty' under the supervision of 
-	Dr. Pete Bettinger, Dr. Frederick Maier, and Dr. Stephen Kinane.</>,
+	Dr. Pete Bettinger, Dr. Frederick Maier, Dr. Bruno Kanieski da Silva, and Dr. Stephen Kinane.
+        Graduated in one year with a 3.74</>,
       },
       {
-        name: "University of Georgia, BA in Cognitive Science, minor in Computer Science",
+        name: "University of Georgia, BA in Cognitive Science, minor in Computer Science, 2024",
         description: <>Studied a broad curriculum where I completed my foundation areas
 	in Artificial Intelligence and Psychology. This was also the time when I first
 	got involved with research in the forestry space on the PERSEUS project.</>,
@@ -147,35 +148,38 @@ const about = {
     title: "Technical skills",
     skills: [
       {
-        title: "Figma",
-        description: <>Able to prototype in Figma with Once UI with unnatural speed.</>,
+        title: "Python",
+        description: <>Language of choice for data science and machine learning.</>,
         // optional: leave the array empty if you don't want to display images
         images: [
-          {
-            src: "/images/projects/project-01/cover-02.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
-          {
-            src: "/images/projects/project-01/cover-03.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
+          // {
+          //   src: "/images/projects/aidvisor/cover-02.jpg",
+          //   alt: "Project image",
+          //   width: 16,
+          //   height: 9,
+          // },
         ],
       },
       {
-        title: "Next.js",
-        description: <>Building next gen apps with Next.js + Once UI + Supabase.</>,
+        title: "Next.js + Vercel",
+        description: <>Building interactive apps with Next.js + Vercel + Supabase. Serverless ftw!</>,
         // optional: leave the array empty if you don't want to display images
         images: [
-          {
-            src: "/images/projects/project-01/cover-04.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
+        ],
+      },
+      {
+        title: "Django + PostgreSQL",
+        description: <>Not a big fan of webapps, but I do like building APIs. I've worked with Django + PostgreSQL for a few projects.</>,'</>,
+        // optional: leave the array empty if you don't want to display images
+        images: [
+
+        ],
+      },
+      {
+        title: "Streamlit",
+        description: <>Streamlit just makes interactive webapps for machine learning projects so easy.</>,
+        // optional: leave the array empty if you don't want to display images
+        images: [
         ],
       },
     ],
@@ -208,71 +212,6 @@ const gallery = {
       src: "/images/gallery/img-01.jpg",
       alt: "image",
       orientation: "vertical",
-    },
-    {
-      src: "/images/gallery/img-02.jpg",
-      alt: "image",
-      orientation: "horizontal",
-    },
-    {
-      src: "/images/gallery/img-03.jpg",
-      alt: "image",
-      orientation: "vertical",
-    },
-    {
-      src: "/images/gallery/img-04.jpg",
-      alt: "image",
-      orientation: "horizontal",
-    },
-    {
-      src: "/images/gallery/img-05.jpg",
-      alt: "image",
-      orientation: "horizontal",
-    },
-    {
-      src: "/images/gallery/img-06.jpg",
-      alt: "image",
-      orientation: "vertical",
-    },
-    {
-      src: "/images/gallery/img-07.jpg",
-      alt: "image",
-      orientation: "horizontal",
-    },
-    {
-      src: "/images/gallery/img-08.jpg",
-      alt: "image",
-      orientation: "vertical",
-    },
-    {
-      src: "/images/gallery/img-09.jpg",
-      alt: "image",
-      orientation: "horizontal",
-    },
-    {
-      src: "/images/gallery/img-10.jpg",
-      alt: "image",
-      orientation: "horizontal",
-    },
-    {
-      src: "/images/gallery/img-11.jpg",
-      alt: "image",
-      orientation: "vertical",
-    },
-    {
-      src: "/images/gallery/img-12.jpg",
-      alt: "image",
-      orientation: "horizontal",
-    },
-    {
-      src: "/images/gallery/img-13.jpg",
-      alt: "image",
-      orientation: "horizontal",
-    },
-    {
-      src: "/images/gallery/img-14.jpg",
-      alt: "image",
-      orientation: "horizontal",
     },
   ],
 };
