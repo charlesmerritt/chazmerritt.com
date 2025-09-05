@@ -1,0 +1,60 @@
+{
+  "name": "Chaz Merritt",
+  "title": "Graduate Research Assistant | Deep RL & it's applications in forestry",
+  "contact": {
+    "email": "charles.merritt@uga.edu",
+    "website": "https://chazmerritt.com",
+    "location": "Athens, GA"
+  },
+  "links": {
+    "github": "https://github.com/charlesmerritt",
+    "linkedin": "https://www.linkedin.com/in/chaz-merritt/",
+    "medium": "https://medium.com/@chazmerritt4"
+  },
+  "experience": [
+    {
+      "role": "Graduate Research Assistant",
+      "company": "University of Georgia",
+      "period": "2024-Present",
+      "location": "Athens, GA",
+      "highlights": [
+        "Developing deep reinforcement learning models for forestry management.",
+        "Contribute to papers on the intersection of AI and forestry."
+      ]
+    },
+    {
+      "role": "Geospatial Analyst",
+      "company": "Northwest Management",
+      "period": "Summer 2024",
+      "location": "Remote/Moscow, ID",
+      "highlights": [
+        "Develop novel tools for removing subjectivity and automating the forest stand delineation process.",
+        "Gain hands on experience with timber cruising and forest inventory in the University of Idaho Experimental Forest."
+      ]
+    },
+    {
+      "role": "Undergraduate Research Assistant",
+      "company": "University of Georgia",
+      "period": "2023-2024",
+      "location": "Athens, GA",
+      "highlights": [
+        "Presented work at the Southern Forestry & GIS Conference on fine-tuning deep learning models for tree crown delineation.",
+        "Began acquiring the necessary domain knowledge to understand and solve problems in forestry."
+      ]
+    }
+  ],
+  "education": [
+    { "degree": "MS, Artificial Intelligence", "school": "University of Georgia", "period": "2024 — 2025" },
+    { "degree": "BA, Cognitive Science", "school": "University of Georgia", "period": "2020 — 2024" }
+  ],
+  "publications": [
+    { "title": "Optimizing Timber Stands under Uncertainty", "venue": "Pending", "year": 2025, "link": "#" },
+    { "title": "Prevalence of AI & ML in Forestry", "venue": "Pending", "year": 2025, "link": "#" }
+  ],
+  "presentations": [
+    { "title": "Optimizing Timber Stands under Uncertainty", "venue": "Society of American Foresters", "year": 2025, "link": "#" },
+    { "title": "Rapid & Scalable Forest Inventory Estimates with Deep Neural Nets", "venue": "Southern Forestry & GIS Conference", "year": 2023, "link": "https://soforgis.uga.edu/home" }
+  ],
+
+  "skills": ["Python", "Data Science", "Machine Learning", "Deep Learning", "Reinforcement Learning", "Computer Vision", "Natural Language Processing", "GIS"]
+}
