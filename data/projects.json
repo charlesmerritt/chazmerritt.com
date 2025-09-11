@@ -7,6 +7,13 @@
     "link": "https://getbrandonai.com"
   },
   {
+    "title": "This Website",
+    "description": "I designed, deployed, and automated my personal website using a DigitalOcean droplet, Nginx, Cloudflare, and GitHub Actions. The site uses a release-based deployment system with atomic symlinks to ensure zero-downtime updates. GitHub Actions builds and rsyncs new versions to the server on every push to main, then flips the symlink and reloads Nginx.",
+    "tech": ["Networking", "Cloud", "JavaScript", "CI/CD"],
+    "year": 2025,
+    "link": "https://github.com/charlesmerritt/chazmerritt.com"
+  },
+  {
     "title": "Laundry Bot",
     "description": "This project uses a Raspberry Pi and vibration sensor to monitor your laundry and send you a notification when it's ready. We do this by characterizing the vibration patterns of your laundry and using a machine learning model to predict when it's ready.",
     "tech": ["Python", "OpenAI", "TypeScript", "Node.js", "Raspberry Pi", "Discord", "Machine Learning"],
@@ -68,12 +75,5 @@
     "tech": ["Python", "Web Scraping", "Web Interaction", "Selenium", "Security"],
     "year": 2022,
     "link": "https://github.com/charlesmerritt/code-cracker"
-  },
-  {
-    "title": "This Website",
-    "description": "I designed, deployed, and automated my personal website using a DigitalOcean droplet, Nginx, Cloudflare, and GitHub Actions. The site uses a release-based deployment system with atomic symlinks to ensure zero-downtime updates. GitHub Actions builds and rsyncs new versions to the server on every push to main, then flips the symlink and reloads Nginx.",
-    "tech": ["Networking", "Cloud", "JavaScript", "CI/CD"],
-    "year": 2025,
-    "link": "https://github.com/charlesmerritt/chazmerritt.com"
   }
 ]
