@@ -1,0 +1,20 @@
+[
+  {
+    "id": "soforgis-stage-2023",
+    "title": "Presenting at Southern Forestry & GIS Conference",
+    "src": "assets/gallery/soforgis23pres.jpg",
+    "caption": "On stage discussing fine-tuning deep learning models for tree crown delineation.",
+    "tags": ["conference", "presentation", "forestry"],
+    "usedOn": "/index.html#cv",
+    "hidden": false
+  },
+  {
+    "id": "profile-headshot",
+    "title": "Profile Headshot",
+    "src": "assets/gallery/profile-headshot.jpg",
+    "caption": "",
+    "tags": ["profile"],
+    "usedOn": "/index.html#cv",
+    "hidden": true
+  }
+]

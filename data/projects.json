@@ -1,0 +1,72 @@
+[
+  {
+    "title": "Brandon AI",
+    "description": "This is an ongoing project dedicated to democratizing access to trademarks for small businesses who can't afford expensive trademark lawyers and lack the expertise and resources necessary to navigate the process on their own.",
+    "tech": ["Python", "OpenAI", "Modal", "FastAPI", "TypeScript", "NLP", "Unstructured Data", "LegalTech"],
+    "year": 2025,
+    "link": "https://getbrandonai.com"
+  },
+  {
+    "title": "Laundry Bot",
+    "description": "This project uses a Raspberry Pi and vibration sensor to monitor your laundry and send you a notification when it's ready. We do this by characterizing the vibration patterns of your laundry and using a machine learning model to predict when it's ready.",
+    "tech": ["Python", "OpenAI", "TypeScript", "Node.js", "Raspberry Pi", "Discord", "Machine Learning"],
+    "year": 2025,
+    "link": "https://github.com/charlesmerritt/py_laundry"
+  },
+  {
+    "title": "Forays in Advanced Forest Planning with Dr. Pete Bettinger",
+    "description": "Experiments with advanced forest planning techniques in Dr. Bettinger's class. We used exact solvers to solve the linear programming problems and compared them to the results of the metaheuristic solvers.",
+    "tech": ["Python", "NumPy", "PuLP", "Gurobi"],
+    "year": 2024,
+    "link": "https://github.com/charlesmerritt/AdvancedForestPlanning"
+  },
+  {
+    "title": "AIDVISOR",
+    "description": "This is my New Media Capstone project dedicated to leveraging LLMs and the OpenAI Assistants API to promote financial aid equity and improve access to scholarships, grants, and other resources for students.",
+    "tech": ["Python", "OpenAI", "OpenAI", "Gradio", "Django", "Railway"],
+    "year": 2024,
+    "link": "https://github.com/charlesmerritt/AIDVISOR"
+  },
+  {
+    "title": "Multi-Agent Debate for LLMs",
+    "description": "Chain of thought reasoning is common today, but it is not always the best way to reason. This project explores the use of multi-agent debate to improve the reasoning of LLMs.",
+    "tech": ["Python", "OpenAI", "TypeScript", "Node.js"],
+    "year": 2024,
+    "link": "https://github.com/shaan101patel/ML-Multiagent-Debate"
+  },
+  {
+    "title": "Linear Dynamical Systems for Texture Modeling",
+    "description": "This project demonstrates the capabilities of the Moore-Penrose pseudoinverse for an interesting application of linear dynamical systems.",
+    "tech": ["Python", "NumPy", "SciPy"],
+    "year": 2023,
+    "link": "https://github.com/charlesmerritt/LDS-Vision"
+  },
+  {
+    "title": "Sherwood",
+    "description": "Trust, but verify. Sherwood is a tool for analyzing the trading activity of politicians. It uses various data sources to provide a comprehensive view of the trading activity of politicians.",
+    "tech": ["Python", "Machine Learning", "Data Science", "Data Visualization"],
+    "year": 2023,
+    "link": "https://github.com/charlesmerritt/Sherwood"
+  },
+  {
+    "title": "Logistic Regression with Evolutionary Algorithm",
+    "description": "This project demonstrates a classic machine learning classification algorithm with a bit of a twist. Instead of using stochastic gradient descent for optimization, we use an evolutionary algorithm to optimize the parameters of the logistic regression model.",
+    "tech": ["Python", "Machine Learning"],
+    "year": 2023,
+    "link": "https://github.com/charlesmerritt/Logistic-Regression-and-Genetic-Algorithm"
+  },
+  {
+    "title": "Wordsearch",
+    "description": "This wordsearch program is able to read input from separate files, wordbank.txt and wordpuzzle.txt, and then perform a searching algorithim using the information parsed from the files to solve the wordsearch puzzle.",
+    "tech": ["Python"],
+    "year": 2022,
+    "link": "https://github.com/charlesmerritt/wordsearch"
+  },
+  {
+    "title": "Code Cracker",
+    "description": "This is a simple brute force program that reads through a dictionary.txt file and automatically tries every password sequentially.",
+    "tech": ["Python", "Web Scraping", "Web Interaction", "Selenium", "Security"],
+    "year": 2022,
+    "link": "https://github.com/charlesmerritt/code-cracker"
+  }
+]
