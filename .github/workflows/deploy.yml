@@ -1,0 +1,51 @@
+name: Deploy static site
+
+on:
+  push:
+    branches: [ "main" ]
+
+concurrency:
+  group: deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Start SSH agent
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Add known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.KNOWN_HOSTS }}" >> ~/.ssh/known_hosts
+
+      - name: Create release dir
+        run: |
+          REL="releases/$(date +%Y%m%d%H%M%S)"
+          echo "REL=$REL" >> $GITHUB_ENV
+          ssh ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} "mkdir -p ${{ secrets.DEPLOY_PATH }}/${REL}"
+
+      - name: Rsync files
+        run: |
+          rsync -az --delete \
+            --exclude '.git' \
+            --exclude '.github' \
+            ./ ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:${{ secrets.DEPLOY_PATH }}/${REL}/
+
+      - name: Activate release
+        run: |
+          ssh ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} "\
+            ln -sfn ${{ secrets.DEPLOY_PATH }}/${REL} ${{ secrets.DEPLOY_PATH }}/current"
+
+      - name: Sanity checks
+        run: |
+          ssh ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} "\
+            test -f ${{ secrets.DEPLOY_PATH }}/current/index.html && \
+            find ${{ secrets.DEPLOY_PATH }}/current -maxdepth 1 -type f -name 'index.*' -printf '%f\n' && \
+            echo OK"
