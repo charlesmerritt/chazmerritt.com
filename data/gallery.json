@@ -16,5 +16,23 @@
     "tags": ["profile"],
     "usedOn": "/index.html#cv",
     "hidden": true
+  },
+  {
+    "id": "poster-1-perseus",
+    "title": "Poster 1",
+    "src": "assets/gallery/1691194214356.jpg",
+    "caption": "PERSEUS Annual Meeting Poster Session on OLAF (olaf.uga.edu)",
+    "tags": ["conference", "presentation", "forestry"],
+    "usedOn": "",
+    "hidden": false
+  },
+  {
+    "id": "mochi-pic",
+    "title": "My cat Mochi :3",
+    "src": "assets/gallery/mochinme.jpg",
+    "caption": "This is me and my cat/child Mochi",
+    "tags": ["profile"],
+    "usedOn": "",
+    "hidden": false
   }
 ]
