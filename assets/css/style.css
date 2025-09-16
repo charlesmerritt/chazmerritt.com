@@ -176,6 +176,19 @@ code { background: rgba(255,255,255,0.06); color: var(--fg); padding: 2px 6px; b
   .cv-meta { grid-template-columns: 1fr auto; align-items: center; }
 }
 
+/* Ensure CV meta stacks on small screens even when an avatar is present */
+@media (max-width: 650px) {
+  .cv-meta.has-avatar {
+    grid-template-columns: 1fr;
+    align-items: start;
+    justify-items: start;
+    text-align: left;
+    gap: 12px;
+  }
+  /* Make avatar not shrink too small and align nicely */
+  .cv-meta.has-avatar .avatar-wrap { margin: 0; }
+}
+
 @media (max-width: 520px) {
   .cv-meta .name { font-size: 24px; }
   .avatar-wrap { width: 72px; height: 72px; }
@@ -202,6 +215,54 @@ code { background: rgba(255,255,255,0.06); color: var(--fg); padding: 2px 6px; b
   --nav-hover-bg: rgba(0,0,0,0.05);
   /* Stronger, more legible accent in light mode */
   --accent: #0b63ce;
+}
+
+/* Responsive adjustments
+ *
+ * These rules ensure the site remains usable on smaller screens like phones and tablets
+ * without altering the desktop experience. They only apply below certain widths.
+ */
+@media (max-width: 700px) {
+  /* Wrap navigation items so they don't overflow horizontally on narrow viewports */
+  .site-header nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+  }
+  /* Reset left margin and allow items to flex so they distribute evenly */
+  .site-header nav a,
+  .site-header nav button {
+    margin-left: 0;
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 48px;
+  }
+  /* Allow header container itself to wrap if needed */
+  .site-header {
+    flex-wrap: wrap;
+  }
+  /* Reduce overall horizontal padding on small screens */
+  .container {
+    padding: 24px 16px 60px;
+  }
+  /* Decrease the minimum width of cards in grids so they fit smaller screens */
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  }
+}
+
+@media (max-width: 450px) {
+  /* On very narrow screens, stack cards into a single column */
+  .grid,
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
 }
 .theme-toggle { margin-left: 10px; padding: 8px 10px; border-radius: 10px; border: none; background: transparent; color: var(--fg); cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
 .theme-toggle:hover { background: var(--nav-hover-bg); }
