@@ -10,6 +10,8 @@ function getPreferredTheme() {
   return window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
 }
 
+/* (Removed) Page fade transitions */
+
 function applyTheme(theme) {
   root.setAttribute('data-theme', theme);
   const btn = document.getElementById('theme-toggle');

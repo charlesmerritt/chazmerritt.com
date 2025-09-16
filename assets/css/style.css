@@ -63,7 +63,7 @@ a:hover { color: var(--accent); }
 
 .site-header {
   position: sticky; top: 0; z-index: 20;
-  display: flex; align-items: center; justify-content: space-between;
+  display: flex; align-items: center; justify-content: center;
   padding: 16px 22px; backdrop-filter: blur(10px);
   background: var(--header-bg);
   border-bottom: 1px solid var(--header-border);
@@ -71,9 +71,11 @@ a:hover { color: var(--accent); }
 }
 .brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: 0.5px; }
 .brand svg { width: 22px; height: 22px; fill: var(--fg); opacity: 0.95; }
-nav a { display: inline-flex; align-items: center; gap: 8px; margin-left: 10px; color: var(--fg); opacity: 0.85; padding: 8px 10px; border-radius: 10px; transition: background 140ms ease, opacity 140ms ease; }
+/* Center nav and use gap instead of link margins */
+.site-header nav { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: nowrap; }
+nav a { display: inline-flex; align-items: center; gap: 8px; margin-left: 0; color: var(--fg); opacity: 0.85; padding: 8px 10px; border-radius: 10px; transition: background 140ms ease, opacity 140ms ease, border-color 140ms ease; border: 1px solid transparent; white-space: nowrap; }
 nav a:hover { opacity: 1; background: var(--nav-hover-bg); }
-nav a.active { color: var(--accent); opacity: 1; background: rgba(94,225,255,0.10); border: 1px solid rgba(94,225,255,0.25); }
+nav a.active { color: var(--accent); opacity: 1; background: rgba(94,225,255,0.10); border-color: rgba(94,225,255,0.25); }
 nav a svg { width: 16px; height: 16px; fill: currentColor; opacity: 0.9; }
 
 /* Focus visibility */
@@ -228,13 +230,14 @@ code { background: rgba(255,255,255,0.06); color: var(--fg); padding: 2px 6px; b
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
     gap: 6px;
   }
   /* Reset left margin and allow items to flex so they distribute evenly */
   .site-header nav a,
   .site-header nav button {
     margin-left: 0;
-    flex: 1 1 auto;
+    flex: 0 0 auto; /* do not stretch; keep centered sizing */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -264,7 +267,19 @@ code { background: rgba(255,255,255,0.06); color: var(--fg); padding: 2px 6px; b
     grid-template-columns: 1fr;
   }
 }
-.theme-toggle { margin-left: 10px; padding: 8px 10px; border-radius: 10px; border: none; background: transparent; color: var(--fg); cursor: pointer; display: inline-flex; align-items: center; gap: 8px; }
+
+/* Projects: force a single column on small screens for consistency and accessibility */
+@media (max-width: 700px) {
+  #projects-grid {
+    grid-template-columns: 1fr;
+  }
+  /* Gallery: match one-column behavior on small screens */
+  #gallery-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.theme-toggle { margin-left: 0; padding: 8px 10px; border-radius: 10px; border: 1px solid transparent; background: transparent; color: var(--fg); cursor: pointer; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; transition: background 140ms ease, opacity 140ms ease, border-color 140ms ease; }
 .theme-toggle:hover { background: var(--nav-hover-bg); }
 .theme-toggle svg { width: 16px; height: 16px; fill: currentColor; opacity: 0.9; }
 

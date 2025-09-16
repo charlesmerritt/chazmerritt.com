@@ -22,7 +22,7 @@
   },
   {
     "title": "Forays in Advanced Forest Planning with Dr. Pete Bettinger",
-    "description": "Experiments with advanced forest planning techniques in Dr. Bettinger's class. We used exact solvers to solve the linear programming problems and compared them to the results of the metaheuristic solvers.",
+    "description": "Implemented exact and heuristic methods for constrained forest harvest scheduling in Dr. Bettinger’s Advanced Forest Planning course, including LP, MIP, binary search, genetic algorithm, simulated annealing, and tabu search.",
     "tech": ["Python", "NumPy", "PuLP", "Gurobi"],
     "year": 2024,
     "link": "https://github.com/charlesmerritt/AdvancedForestPlanning"
