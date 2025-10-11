@@ -130,7 +130,10 @@ async function renderCV() {
         <div class="name">${cv.name}</div>
         <div class="subtle">${cv.title || ''}</div>
       </div>
-      <div class="subtle">${links.join(' · ')}</div>
+      <div class="subtle">${links.join(' ')}</div>
+      <div class="cv-actions">
+        <a href="assets/pdf/cv.pdf" target="_blank" rel="noopener">CV (PDF)</a>
+      </div>
     `;
 
     // Wire up avatar lightbox behavior
