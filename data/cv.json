@@ -44,12 +44,12 @@
     }
   ],
   "education": [
-    { "degree": "MS, Artificial Intelligence", "school": "University of Georgia", "period": "2024 — 2025" },
+    { "degree": "MS, Artificial Intelligence", "school": "University of Georgia", "period": "2024 — 2026" },
     { "degree": "BA, Cognitive Science", "school": "University of Georgia", "period": "2020 — 2024" }
   ],
   "publications": [
-    { "title": "Optimizing Timber Stands under Uncertainty", "venue": "Pending", "year": 2025, "link": "#" },
-    { "title": "Prevalence of AI & ML in Forestry", "venue": "Pending", "year": 2025, "link": "#" }
+    { "title": "Optimizing Timber Stands under Uncertainty", "venue": "Pending", "year": 2026, "link": "#" },
+    { "title": "Prevalence of AI & ML in Forestry", "venue": "Pending", "year": 2026, "link": "#" }
   ],
   "presentations": [
     { "title": "Optimizing Timber Stands under Uncertainty", "venue": "Society of American Foresters", "year": 2025, "link": "#" },
