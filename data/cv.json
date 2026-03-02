@@ -1,6 +1,6 @@
 {
   "name": "Chaz Merritt",
-  "title": "Graduate Research Assistant | Deep RL & it's applications in forestry",
+  "title": "Graduate Research Assistant | Deep Learning & it's applications in forestry",
   "contact": {
     "email": "charles.merritt@uga.edu",
     "website": "https://chazmerritt.com",
@@ -49,7 +49,7 @@
   ],
   "publications": [
     { "title": "Optimizing Timber Stands under Uncertainty", "venue": "Pending", "year": 2026, "link": "#" },
-    { "title": "Prevalence of AI & ML in Forestry", "venue": "Pending", "year": 2026, "link": "#" }
+    { "title": "AI Technology Use in North American Forestry", "venue": "Journal of Forestry", "year": 2026, "link": "https://link.springer.com/article/10.1007/s44392-026-00079-8" }
   ],
   "presentations": [
     { "title": "Optimizing Timber Stands under Uncertainty", "venue": "Society of American Foresters", "year": 2025, "link": "#" },
