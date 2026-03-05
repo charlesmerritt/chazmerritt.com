@@ -1,6 +1,6 @@
 {
   "name": "Chaz Merritt",
-  "title": "Graduate Research Assistant | Deep Learning & it's applications in forestry",
+  "title": "Graduate Research Assistant | ML & it's applications in forestry",
   "contact": {
     "email": "charles.merritt@uga.edu",
     "website": "https://chazmerritt.com",
@@ -18,7 +18,7 @@
       "period": "2024-Present",
       "location": "Athens, GA",
       "highlights": [
-        "Developing deep reinforcement learning models for forestry management.",
+        "Developing Markov models for forestry management.",
         "Contribute to papers on the intersection of AI and forestry."
       ]
     },
@@ -48,11 +48,11 @@
     { "degree": "BA, Cognitive Science", "school": "University of Georgia", "period": "2020 — 2024" }
   ],
   "publications": [
-    { "title": "Optimizing Timber Stands under Uncertainty", "venue": "Pending", "year": 2026, "link": "#" },
-    { "title": "AI Technology Use in North American Forestry", "venue": "Journal of Forestry", "year": 2026, "link": "https://link.springer.com/article/10.1007/s44392-026-00079-8" }
+    { "title": "Quantifying Economic Value-at-Risk in Timber Management via Markov Chain Monte Carlo", "venue": "Pending", "year": 2026, "link": "#" },
+    { "title": "AI Technology Use in North American Forestry ", "venue": "Journal of Forestry", "year": 2026, "link": "https://doi.org/10.1007/s44392-026-00079-8" }
   ],
   "presentations": [
-    { "title": "Optimizing Timber Stands under Uncertainty", "venue": "Society of American Foresters", "year": 2025, "link": "#" },
+    { "title": "Optimizing Timber Stands under Uncertainty", "venue": "Society of American Foresters Conference", "year": 2025, "link": "#" },
     { "title": "Rapid & Scalable Forest Inventory Estimates with Deep Neural Nets", "venue": "Southern Forestry & GIS Conference", "year": 2023, "link": "https://soforgis.uga.edu/home" }
   ],
 
