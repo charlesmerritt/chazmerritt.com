@@ -48,7 +48,7 @@
     { "degree": "BA, Cognitive Science", "school": "University of Georgia", "period": "2020 — 2024" }
   ],
   "publications": [
-    { "title": "Quantifying Economic Value-at-Risk in Timber Management via Markov Chain Monte Carlo", "venue": "Pending", "year": 2026, "link": "#" },
+    { "title": "Stochastic Valuation of Pine Stands Using Monte Carlo Simulation", "venue": "Pending", "year": 2026, "link": "#" },
     { "title": "AI Technology Use in North American Forestry ", "venue": "Journal of Forestry", "year": 2026, "link": "https://doi.org/10.1007/s44392-026-00079-8" }
   ],
   "presentations": [
