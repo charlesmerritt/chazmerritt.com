@@ -92,16 +92,9 @@ function getQueryParam(name) {
   return params.get(name);
 }
 
-/* Helper: load CV data from cj.json (preferred) with fallback to cv.json */
-async function loadCVData() {
-  const cj = await loadJSON('data/cj.json', null);
-  if (cj) return cj;
-  return await loadJSON('data/cv.json', null);
-}
-
 /* Render CV from data/cv.json */
 async function renderCV() {
-  const cv = await loadCVData();
+  const cv = await loadJSON('data/cv.json', null);
   if (!cv) return;
 
   // Meta
@@ -556,17 +549,17 @@ window.addEventListener('DOMContentLoaded', async () => {
   }
   if (page === 'projects') {
     await renderProjects();
-    const links = await loadCVData();
+    const links = await loadJSON('data/cv.json', null);
     if (links) updateFooterLinks({ email: links.contact?.email, github: links.links?.github, linkedin: links.links?.linkedin, medium: links.links?.medium });
   }
   if (page === 'writings') {
     await renderWritings();
-    const links = await loadCVData();
+    const links = await loadJSON('data/cv.json', null);
     if (links) updateFooterLinks({ email: links.contact?.email, github: links.links?.github, linkedin: links.links?.linkedin, medium: links.links?.medium });
   }
   if (page === 'gallery') {
     await renderGallery();
-    const links = await loadCVData();
+    const links = await loadJSON('data/cv.json', null);
     if (links) updateFooterLinks({ email: links.contact?.email, github: links.links?.github, linkedin: links.links?.linkedin, medium: links.links?.medium });
   }
 });
