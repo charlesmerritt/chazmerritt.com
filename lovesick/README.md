@@ -20,7 +20,7 @@ API key is inside the encrypted blob and is never served in plaintext.
 
 3. If the game's assets changed, re-copy them: `cp -R ~/projects/lovesick/assets/. lovesick/assets/`
 
-   > **Note:** the source repo's `assets/mp3/f-sharp string loop.mp4` is 172MB (contains a video track) — over GitHub's 100MB push limit. The vendored copy here was remuxed to audio-only (26MB). If you re-copy assets, re-strip that file (or exclude it from the copy) before committing, or the push will fail.
+   > **Note:** the source repo's `assets/mp3/f-sharp string loop.mp4` is 172MB (contains a video track) — over GitHub's 100MB push limit. The vendored copy here was remuxed to audio-only (26MB). If you re-copy assets, re-strip that file before committing (`python3 scripts/strip-video-track.py ~/projects/lovesick/assets/mp3/f-sharp\ string\ loop.mp4 lovesick/assets/mp3/f-sharp\ string\ loop.mp4` — zero-dependency, verifies audio bytes are untouched) or exclude it from the copy, or the push will fail.
 
 4. Commit `lovesick/index.html` (+ any asset changes) and push — the existing
    GitHub Action rsyncs it to the droplet. No server config changes.
