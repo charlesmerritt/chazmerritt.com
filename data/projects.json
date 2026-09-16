@@ -1,78 +1,151 @@
 [
   {
+    "title": "Bark ID Embedding Explorer",
+    "description": "Interactive 3D visualization of DINOv2 embedding space for the UGA bark image dataset: 2,764 photos across 26 species, reduced with UMAP, rendered with Three.js. Hover shows photos, clicking surfaces tree metadata and nearest neighbors.",
+    "tech": [
+      "Python",
+      "PyTorch",
+      "DINOv2",
+      "UMAP",
+      "Three.js",
+      "Cloudflare R2"
+    ],
+    "year": 2026,
+    "link": "/bark-viz.html"
+  },
+  {
     "title": "Brandon AI",
     "description": "This is an ongoing project dedicated to democratizing access to trademarks for small businesses who can't afford expensive trademark lawyers and lack the expertise and resources necessary to navigate the process on their own.",
-    "tech": ["Python", "OpenAI", "Modal", "FastAPI", "TypeScript", "NLP", "Unstructured Data", "LegalTech"],
+    "tech": [
+      "Python",
+      "OpenAI",
+      "Modal",
+      "FastAPI",
+      "TypeScript",
+      "NLP",
+      "Unstructured Data",
+      "LegalTech"
+    ],
     "year": 2025,
     "link": "https://getbrandonai.com"
   },
   {
     "title": "This Website",
     "description": "I designed, deployed, and automated my personal website using a DigitalOcean droplet, Nginx, Cloudflare, and GitHub Actions.",
-    "tech": ["Networking", "Cloud", "JavaScript", "CI/CD"],
+    "tech": [
+      "Networking",
+      "Cloud",
+      "JavaScript",
+      "CI/CD"
+    ],
     "year": 2025,
     "link": "https://github.com/charlesmerritt/chazmerritt.com"
   },
   {
     "title": "Laundry Bot",
     "description": "This project uses a Raspberry Pi and vibration sensor to monitor your laundry and send you a notification when it's ready. We do this by characterizing the vibration patterns of your laundry and using a machine learning model to predict when it's ready.",
-    "tech": ["Python", "OpenAI", "TypeScript", "Node.js", "Raspberry Pi", "Discord", "Machine Learning"],
+    "tech": [
+      "Python",
+      "OpenAI",
+      "TypeScript",
+      "Node.js",
+      "Raspberry Pi",
+      "Discord",
+      "Machine Learning"
+    ],
     "year": 2025,
     "link": "https://github.com/charlesmerritt/py_laundry"
   },
   {
     "title": "Forays in Advanced Forest Planning with Dr. Pete Bettinger",
-    "description": "Implemented exact and heuristic methods for constrained forest harvest scheduling in Dr. Bettinger’s Advanced Forest Planning course, including LP, MIP, binary search, genetic algorithm, simulated annealing, and tabu search.",
-    "tech": ["Python", "NumPy", "PuLP", "Gurobi"],
+    "description": "Implemented exact and heuristic methods for constrained forest harvest scheduling in Dr. Bettinger\u2019s Advanced Forest Planning course, including LP, MIP, binary search, genetic algorithm, simulated annealing, and tabu search.",
+    "tech": [
+      "Python",
+      "NumPy",
+      "PuLP",
+      "Gurobi"
+    ],
     "year": 2024,
     "link": "https://github.com/charlesmerritt/AdvancedForestPlanning"
   },
   {
     "title": "AIDVISOR",
     "description": "This is my New Media Capstone project dedicated to leveraging LLMs and the OpenAI Assistants API to promote financial aid equity and improve access to scholarships, grants, and other resources for students.",
-    "tech": ["Python", "OpenAI", "OpenAI", "Gradio", "Django", "Railway"],
+    "tech": [
+      "Python",
+      "OpenAI",
+      "OpenAI",
+      "Gradio",
+      "Django",
+      "Railway"
+    ],
     "year": 2024,
     "link": "https://github.com/charlesmerritt/AIDVISOR"
   },
   {
     "title": "Multi-Agent Debate for LLMs",
     "description": "Chain of thought reasoning is common today, but it is not always the best way to reason. This project explores the use of multi-agent debate to improve the reasoning of LLMs.",
-    "tech": ["Python", "OpenAI", "TypeScript", "Node.js"],
+    "tech": [
+      "Python",
+      "OpenAI",
+      "TypeScript",
+      "Node.js"
+    ],
     "year": 2024,
     "link": "https://github.com/shaan101patel/ML-Multiagent-Debate"
   },
   {
     "title": "Linear Dynamical Systems for Texture Modeling",
     "description": "This project demonstrates the capabilities of the Moore-Penrose pseudoinverse for an interesting application of linear dynamical systems.",
-    "tech": ["Python", "NumPy", "SciPy"],
+    "tech": [
+      "Python",
+      "NumPy",
+      "SciPy"
+    ],
     "year": 2023,
     "link": "https://github.com/charlesmerritt/LDS-Vision"
   },
   {
     "title": "Sherwood",
     "description": "Trust, but verify. Sherwood is a tool for analyzing the trading activity of politicians. It uses various data sources to provide a comprehensive view of the trading activity of politicians.",
-    "tech": ["Python", "Machine Learning", "Data Science", "Data Visualization"],
+    "tech": [
+      "Python",
+      "Machine Learning",
+      "Data Science",
+      "Data Visualization"
+    ],
     "year": 2023,
     "link": "https://github.com/charlesmerritt/Sherwood"
   },
   {
     "title": "Logistic Regression with Evolutionary Algorithm",
     "description": "This project demonstrates a classic machine learning classification algorithm with a bit of a twist. Instead of using stochastic gradient descent for optimization, we use an evolutionary algorithm to optimize the parameters of the logistic regression model.",
-    "tech": ["Python", "Machine Learning"],
+    "tech": [
+      "Python",
+      "Machine Learning"
+    ],
     "year": 2023,
     "link": "https://github.com/charlesmerritt/Logistic-Regression-and-Genetic-Algorithm"
   },
   {
     "title": "Wordsearch",
     "description": "This wordsearch program is able to read input from separate files, wordbank.txt and wordpuzzle.txt, and then perform a searching algorithim using the information parsed from the files to solve the wordsearch puzzle.",
-    "tech": ["Python"],
+    "tech": [
+      "Python"
+    ],
     "year": 2022,
     "link": "https://github.com/charlesmerritt/wordsearch"
   },
   {
     "title": "Code Cracker",
     "description": "This is a simple brute force program that reads through a dictionary.txt file and automatically tries every password sequentially.",
-    "tech": ["Python", "Web Scraping", "Web Interaction", "Selenium", "Security"],
+    "tech": [
+      "Python",
+      "Web Scraping",
+      "Web Interaction",
+      "Selenium",
+      "Security"
+    ],
     "year": 2022,
     "link": "https://github.com/charlesmerritt/code-cracker"
   }
