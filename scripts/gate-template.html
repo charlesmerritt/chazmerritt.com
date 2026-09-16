@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>&#128274;</title>
+  <link rel="stylesheet" href="gate.css" />
+</head>
+<body>
+  <main class="vault">
+    <!-- TODO: real art — placeholder chest + heart padlock + descending key -->
+    <div class="chest" id="chest" data-state="locked">
+      <div class="chest-body">
+        <div class="chest-lid"></div>
+        <div class="padlock" id="padlock">
+          <div class="padlock-shackle"></div>
+          <div class="padlock-heart">&#9829;</div>
+        </div>
+      </div>
+      <div class="key" id="key" aria-hidden="true">&#128273;</div>
+    </div>
+
+    <form id="unlock-form" autocomplete="off">
+      <input id="passphrase" type="password" placeholder="whisper the word&hellip;"
+             aria-label="Passphrase" autocomplete="off" spellcheck="false" />
+      <p id="error" class="error" role="alert" hidden>Not quite.</p>
+    </form>
+
+    <div id="game-mount" class="game-mount"></div>
+  </main>
+
+  <script type="application/json" id="lovesick-payload">__LOVESICK_PAYLOAD__</script>
+  <script type="module" src="gate.js"></script>
+</body>
+</html>
