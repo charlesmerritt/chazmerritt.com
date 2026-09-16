@@ -1,5 +1,19 @@
 [
   {
+    "title": "Bark ID Embedding Explorer",
+    "description": "Interactive 3D visualization of DINOv2 embedding space for the UGA bark image dataset: 2,764 photos across 26 species, reduced with UMAP, rendered with Three.js. Hover shows photos, clicking surfaces tree metadata and nearest neighbors.",
+    "tech": [
+      "Python",
+      "PyTorch",
+      "DINOv2",
+      "UMAP",
+      "Three.js",
+      "Cloudflare R2"
+    ],
+    "year": 2026,
+    "link": "https://viz.chazmerritt.com"
+  },
+  {
     "title": "Brandon AI",
     "description": "This is an ongoing project dedicated to democratizing access to trademarks for small businesses who can't afford expensive trademark lawyers and lack the expertise and resources necessary to navigate the process on their own.",
     "tech": [
