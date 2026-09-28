@@ -1,9 +1,23 @@
 [
   {
+    "title": "SETS",
+    "description": "A web application for Dr. Bruno Da Silva’s Spatial Equilibrium Timber Supply optimization software.",
+    "tech": ["Next.js", "Forestry", "Optimization", "Railway"],
+    "year": 2026,
+    "link": "https://sets.up.railway.app/"
+  },
+  {
+    "title": "Map Viewer",
+    "description": "An interactive map viewer for exploring geospatial data, streaming Cloud-Optimized GeoTIFFs, uploading GeoJSON layers, and calculating zonal statistics.",
+    "tech": ["JavaScript", "GIS", "TiTiler", "GeoJSON", "Railway"],
+    "year": 2026,
+    "link": "https://map-viewer-production-7c3d.up.railway.app/"
+  },
+  {
     "title": "Brandon AI",
     "description": "This is an ongoing project dedicated to democratizing access to trademarks for small businesses who can't afford expensive trademark lawyers and lack the expertise and resources necessary to navigate the process on their own.",
     "tech": ["Python", "OpenAI", "Modal", "FastAPI", "TypeScript", "NLP", "Unstructured Data", "LegalTech"],
-    "year": 2025,
+    "year": 2026,
     "link": "https://getbrandonai.com"
   },
   {
