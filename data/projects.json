@@ -1,5 +1,30 @@
 [
   {
+    "title": "SETS",
+    "description": "A web application for Dr. Bruno Da Silva\u2019s Spatial Equilibrium Timber Supply optimization software.",
+    "tech": [
+      "Next.js",
+      "Forestry",
+      "Optimization",
+      "Railway"
+    ],
+    "year": 2026,
+    "link": "https://sets.up.railway.app/"
+  },
+  {
+    "title": "Map Viewer",
+    "description": "An interactive map viewer for exploring geospatial data, streaming Cloud-Optimized GeoTIFFs, uploading GeoJSON layers, and calculating zonal statistics.",
+    "tech": [
+      "JavaScript",
+      "GIS",
+      "TiTiler",
+      "GeoJSON",
+      "Railway"
+    ],
+    "year": 2026,
+    "link": "https://map-viewer-production-7c3d.up.railway.app/"
+  },
+  {
     "title": "Bark ID Embedding Explorer",
     "description": "Interactive 3D visualization of DINOv2 embedding space for the UGA bark image dataset: 2,764 photos across 26 species, reduced with UMAP, rendered with Three.js. Hover shows photos, clicking surfaces tree metadata and nearest neighbors.",
     "tech": [
@@ -26,7 +51,7 @@
       "Unstructured Data",
       "LegalTech"
     ],
-    "year": 2025,
+    "year": 2026,
     "link": "https://getbrandonai.com"
   },
   {
