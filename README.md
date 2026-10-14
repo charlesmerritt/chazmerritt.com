@@ -2,10 +2,30 @@ This is my new minimalist website which hosts my portfolio/CV and other things.
 
 ## Writing a post
 
-1. Write the post as plain Markdown in `posts/<slug>.md` (no front matter, no title heading — the page renders those). Put images in `posts/images/` and reference them as `/posts/images/<file>`.
-2. Add an entry to `data/writings.json` with `slug`, `title`, `date` (`YYYY-MM-DD`), `summary`, and `tags`.
+Needs Node; there are no dependencies to install.
 
-The post shows up at `/writings.html?post=<slug>`, rendered in the browser by the vendored [marked](https://github.com/markedjs/marked) in `assets/js/vendor/`.
+1. `npm run new -- "Post title"` creates `posts/<slug>.md` as a draft.
+2. `npm run dev` serves the site at http://localhost:8000 with drafts listed and the page reloading on every save. Write in your editor and watch it there.
+3. Fill in the front matter as you go:
+
+   ```yaml
+   ---
+   title: "Post title"
+   date: 2026-10-14
+   summary: "One line shown under the title and on the card."
+   tags: [one, two]
+   draft: true
+   ---
+   ```
+
+   Don't repeat the title as a heading in the body; the page renders it. Put images in `posts/images/` and reference them relatively (`images/photo.jpg`), so they show in your editor's preview as well as on the site.
+4. To publish, delete `draft: true`, set `date`, then commit `posts/` together with `data/writings.json` and push.
+
+`data/writings.json` is generated from the front matter of published posts (`npm run dev` keeps it current, or run `npm run index`), because a static host can't list a folder. Don't edit it by hand. A pre-commit hook in `.githooks/` stops a commit whose staged copy is stale; enable it once per clone with `git config core.hooksPath .githooks`.
+
+Drafts never appear on the live site's list, but a committed draft's raw `.md` is still reachable by URL, so keep anything private uncommitted.
+
+Posts render at `/writings.html?post=<slug>` in the browser via the vendored [marked](https://github.com/markedjs/marked) in `assets/js/vendor/`.
 
 ## Changing JS or CSS
 

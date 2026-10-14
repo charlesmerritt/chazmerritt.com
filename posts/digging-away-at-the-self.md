@@ -1,9 +1,16 @@
+---
+title: "Digging Away at the Self"
+date: 2023-10-19
+summary: "Self-discovery through the words of Nobel laureate Seamus Heaney."
+tags: [poetry, self-awareness, family, reflections, parents]
+---
+
 *I strongly recommend you read the original poem by Heaney [here](https://www.poetryfoundation.org/poems/47555/digging) before digging into this writing.*
 
 Some questions are so ancient and instinctive that they seem stitched into the fabric of the human mind. “Who am I?” and “Why am I here?” have echoed through every age, shaping religions, philosophies, and works of art. They are questions that do not fade, but evolve with each generation. Seamus Heaney’s poem *“Digging”* takes up this struggle in a deeply personal way: how does one honor the weight of tradition while still embracing the truth of the self? For Nobel laureate Seamus Heaney, his father’s spade stands as a symbol of inherited identity, while the pen points toward a different kind of digging — the search for an authentic life of words. Heaney reminds us that every generation must choose its own tool, its own way of digging. Whether with spade, pen, computer, or some yet-unimagined instrument, the work is the same: to uncover who we are and what we are meant to become. With a little insight we can unearth the truth about identity.
 
 <figure>
-  <img src="/posts/images/digging.jpg" alt="A rubber boot pressing a spade into dark, freshly turned soil." width="2121" height="1415">
+  <img src="images/digging.jpg" alt="A rubber boot pressing a spade into dark, freshly turned soil." width="2121" height="1415">
   <figcaption><a href="https://www.drchristianconte.com/wp-content/uploads/2015/09/ts_diggingholes.jpg">Photo credit</a></figcaption>
 </figure>
 

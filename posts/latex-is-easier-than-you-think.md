@@ -1,3 +1,10 @@
+---
+title: "LaTeX Is Easier Than You Think: A Guide to the Modern Writing Stack"
+date: 2026-05-28
+summary: "LaTeX is no longer a niche tool for programmers."
+tags: [science, academia, research, typesetting, writing-tips]
+---
+
 If you’re at all like me, you discover LaTeX (pronounced “lah-tek”) after one too many late nights fighting with Word or Google Docs.
 
 I was hesitant to jump ship. LaTeX seemed complex, needlessly so. I was scared of the unknown.
@@ -15,7 +22,7 @@ This article will serve as a non-technical guide to getting started with LaTeX. 
 **If you’re short on time, I’ve highlighted the major differences between Overleaf, Prism, and a local setup in the table below.**
 
 <figure>
-  <img src="/posts/images/latex-environment-comparison.png" alt="Comparison table of Overleaf, Prism, and a local IDE setup. Pricing: freemium; free; free, not including LLM use. Collaboration: real-time; real-time; limited to Git. Features: Overleaf has a familiar web UI, no external tools, limited compile time, and proprietary AI behind paywalls; Prism is AI-first with voice support and proprietary models, and is new and subject to change; the local setup integrates with your IDE, supports local tools, lets you bring your own LLM, and can be a pain to set up. Offline: Overleaf and Prism require a connection; the local setup works offline, though LLMs need a connection unless self-hosted. Best for: beginners with institutional access; anyone; power users." width="1197" height="987">
+  <img src="images/latex-environment-comparison.png" alt="Comparison table of Overleaf, Prism, and a local IDE setup. Pricing: freemium; free; free, not including LLM use. Collaboration: real-time; real-time; limited to Git. Features: Overleaf has a familiar web UI, no external tools, limited compile time, and proprietary AI behind paywalls; Prism is AI-first with voice support and proprietary models, and is new and subject to change; the local setup integrates with your IDE, supports local tools, lets you bring your own LLM, and can be a pain to set up. Offline: Overleaf and Prism require a connection; the local setup works offline, though LLMs need a connection unless self-hosted. Best for: beginners with institutional access; anyone; power users." width="1197" height="987">
   <figcaption>Feature comparison for different LaTeX environments</figcaption>
 </figure>
 
@@ -131,7 +138,7 @@ export PATH="/usr/local/texlive/2024/bin/x86_64-linux:$PATH"
 And that’s it! This is the exact configuration I use to edit LaTeX documents directly in Windsurf (a vscode fork). If all goes well you should have an interface that looks something like this.
 
 <figure>
-  <img src="/posts/images/latex-windsurf-interface.png" alt="Windsurf editor with a LaTeX CV source file open on the left and its compiled PDF preview on the right. The file explorer shows LaTeX build files collected in a separate build folder." width="1930" height="1042">
+  <img src="images/latex-windsurf-interface.png" alt="Windsurf editor with a LaTeX CV source file open on the left and its compiled PDF preview on the right. The file explorer shows LaTeX build files collected in a separate build folder." width="1930" height="1042">
   <figcaption>My LaTeX interface in Windsurf, very similar to Overleaf, but much cheaper!</figcaption>
 </figure>
 

@@ -335,7 +335,7 @@ async function renderWritings() {
     return `
       <a class="card" href="/writings.html?post=${encodeURIComponent(w.slug)}">
         <div class="title">${w.title}</div>
-        <div class="meta">${formatPostDate(w.date)}</div>
+        <div class="meta">${formatPostDate(w.date)}${w.draft ? ' · Draft' : ''}</div>
         <p class="desc">${w.summary || ''}</p>
         ${tagRow}
       </a>
@@ -357,6 +357,19 @@ async function renderPost(article, post) {
     return;
   }
 
+  // Metadata comes from the index (generated from this front matter), so drop it
+  const body = md.replace(/^---\r?\n[\s\S]*?\r?\n---(?:\r?\n|$)/, '');
+  // Render into an inert template so relative paths can be fixed before images load.
+  // They resolve against posts/, matching how an editor previews the .md file.
+  const rendered = document.createElement('template');
+  rendered.innerHTML = marked.parse(body);
+  const postsBase = new URL('/posts/', window.location.origin);
+  rendered.content.querySelectorAll('[src], a[href]').forEach(el => {
+    const attr = el.hasAttribute('src') ? 'src' : 'href';
+    const value = el.getAttribute(attr);
+    if (!/^([a-z][a-z0-9+.-]*:|\/|#)/i.test(value)) el.setAttribute(attr, new URL(value, postsBase).href);
+  });
+
   document.title = `${post.title} — Chaz Merritt`;
   document.querySelector('meta[name="description"]')?.setAttribute('content', post.summary || '');
   article.innerHTML = `
@@ -364,10 +377,11 @@ async function renderPost(article, post) {
     <header class="post-header">
       <h1>${post.title}</h1>
       ${post.summary ? `<p class="post-subtitle">${post.summary}</p>` : ''}
-      <div class="meta">${formatPostDate(post.date)}</div>
+      <div class="meta">${formatPostDate(post.date)}${post.draft ? ' · Draft' : ''}</div>
     </header>
-    <div class="post-body">${marked.parse(md)}</div>
+    <div class="post-body"></div>
   `;
+  article.querySelector('.post-body').append(rendered.content);
 }
 
 /* Gallery */

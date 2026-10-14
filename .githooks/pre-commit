@@ -1,0 +1,4 @@
+#!/bin/sh
+# Block commits whose data/writings.json doesn't match posts/*.md front matter.
+command -v node >/dev/null 2>&1 || exit 0
+exec node scripts/blog.mjs check
