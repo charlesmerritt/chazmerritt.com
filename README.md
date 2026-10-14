@@ -7,6 +7,10 @@ This is my new minimalist website which hosts my portfolio/CV and other things.
 
 The post shows up at `/writings.html?post=<slug>`, rendered in the browser by the vendored [marked](https://github.com/markedjs/marked) in `assets/js/vendor/`.
 
+## Changing JS or CSS
+
+Cloudflare tells browsers to cache `.js` and `.css` for 4 hours, so after editing `assets/js/main.js` or `assets/css/style.css`, bump the `?v=` on their `<script>`/`<link>` tags in every `.html` page (e.g. `?v=20261014` → today's date). Otherwise returning visitors keep running the old files against the new data.
+
 ## Project Status (auto-generated 2026-07-01)
 
 **Git status:** On `main`, clean, fully in sync with `origin/main`. Last commit 3 weeks ago ("update job title"). Has a GitHub Actions deploy workflow.
