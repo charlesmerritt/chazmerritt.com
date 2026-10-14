@@ -41,25 +41,24 @@
   </header>
 
   <main id="main" class="container">
-    <section class="intro">
-      <h1 class="section-title">Writings</h1>
+    <section id="writings-index">
+      <section class="intro">
+        <h1 class="section-title">Writings</h1>
+      </section>
+
+      <section class="cv-section">
+        <div id="writings-list" class="cards"></div>
+      </section>
     </section>
 
-    <section class="cv-section">
-      <h3>Medium</h3>
-      <div id="medium-feed" class="list cards"></div>
-      <p class="subtle" id="medium-note"></p>
-    </section>
-
-    <section class="cv-section">
-      <div id="writings-list" class="list cards"></div>
-    </section>
+    <article id="post" class="post" hidden></article>
   </main>
 
   <footer class="footer">
     <div id="footer-links"></div>
   </footer>
 
+  <script src="/assets/js/vendor/marked.umd.js" defer></script>
   <script src="/assets/js/main.js" defer></script>
 </body>
 </html>

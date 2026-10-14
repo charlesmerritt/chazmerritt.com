@@ -68,7 +68,6 @@ function updateFooterLinks(links) {
   if (links.email) parts.push(`<a href="mailto:${links.email}">Email</a>`);
   if (links.github) parts.push(`<a href="${links.github}" target="_blank" rel="noopener">GitHub</a>`);
   if (links.linkedin) parts.push(`<a href="${links.linkedin}" target="_blank" rel="noopener">LinkedIn</a>`);
-  if (links.medium) parts.push(`<a href="${links.medium}" target="_blank" rel="noopener">Medium</a>`);
   footer.innerHTML = parts.join(' · ');
 }
 
@@ -79,6 +78,16 @@ async function loadJSON(path, fallback = null) {
     return await res.json();
   } catch (e) {
     return fallback;
+  }
+}
+
+async function loadText(path) {
+  try {
+    const res = await fetch(path, { cache: 'no-cache' });
+    if (!res.ok) throw new Error(res.statusText);
+    return await res.text();
+  } catch (e) {
+    return null;
   }
 }
 
@@ -203,8 +212,7 @@ async function renderCV() {
     updateFooterLinks({
       email: cv.contact?.email,
       github: cv.links?.github,
-      linkedin: cv.links?.linkedin,
-      medium: cv.links?.medium
+      linkedin: cv.links?.linkedin
     });
   }
 
@@ -297,66 +305,69 @@ async function renderProjects() {
   }).join('');
 }
 
-/* Writings */
-async function renderWritings() {
-  const container = document.getElementById('writings-list');
-  const mediumFeed = document.getElementById('medium-feed');
-  const note = document.getElementById('medium-note');
-  if (!container) return;
+/* Writings: index from data/writings.json, post bodies from posts/<slug>.md */
+function formatPostDate(iso) {
+  // Parse as local midnight so the date doesn't shift by a day west of UTC
+  return new Date(`${iso}T00:00:00`).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+}
 
-  const config = await loadJSON('data/config.json', {});
-  // Non-academic posts
+async function renderWritings() {
+  const index = document.getElementById('writings-index');
+  const list = document.getElementById('writings-list');
+  const article = document.getElementById('post');
+  if (!index || !list || !article) return;
+
+  // Swap views before any fetch so the index doesn't flash on post pages
+  const slug = getQueryParam('post');
+  index.hidden = Boolean(slug);
+  article.hidden = !slug;
+
   const posts = await loadJSON('data/writings.json', []);
-  container.innerHTML = posts.map(w => {
-    const tags = Array.isArray(w.tags) ? w.tags.slice(0, 5).map(t => `<span class=\"pill\">${t}</span>`).join('') : (w.platform ? `<span class=\"pill\">${w.platform}</span>` : '');
-    const tagRow = tags ? `<div class=\"tags\">${tags}</div>` : '';
-    const metaParts = [];
-    if (w.date) metaParts.push(w.date);
-    if (w.author) metaParts.push(w.author);
-    const meta = metaParts.join(' · ');
+  if (slug) {
+    await renderPost(article, posts.find(p => p.slug === slug));
+    return;
+  }
+
+  posts.sort((a, b) => b.date.localeCompare(a.date));
+  list.innerHTML = posts.map(w => {
+    const tags = Array.isArray(w.tags) ? w.tags.slice(0, 5).map(t => `<span class="pill">${t}</span>`).join('') : '';
+    const tagRow = tags ? `<div class="tags">${tags}</div>` : '';
     return `
-      <a class="card" href="${w.link}" target="_blank" rel="noopener">
+      <a class="card" href="/writings.html?post=${encodeURIComponent(w.slug)}">
         <div class="title">${w.title}</div>
-        <div class="meta">${meta}</div>
+        <div class="meta">${formatPostDate(w.date)}</div>
         <p class="desc">${w.summary || ''}</p>
         ${tagRow}
       </a>
     `;
   }).join('');
+}
 
-  // Medium integration (best-effort, client-side; may be limited by CORS or rate limits)
-  if (config.mediumHandle && mediumFeed) {
-    const rssUrl = `https://medium.com/feed/@${config.mediumHandle}`;
-    const via = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
-    try {
-      const res = await fetch(via);
-      if (!res.ok) throw new Error('fail');
-      const data = await res.json();
-      if (Array.isArray(data.items)) {
-        mediumFeed.innerHTML = data.items.slice(0, 6).map(item => {
-          const date = new Date(item.pubDate).toLocaleDateString();
-          return `
-            <a class="card" href="${item.link}" target="_blank" rel="noopener">
-              <div class="title">${item.title}</div>
-              <div class="meta">${date}</div>
-              <p class="desc">${(item.description || '').replace(/<[^>]*>/g, '').slice(0, 160)}...</p>
-            </a>
-          `;
-        }).join('');
-        note.textContent = `Showing latest posts from @${config.mediumHandle} via rss2json.`;
-      }
-    } catch (e) {
-      note.textContent = 'Unable to fetch Medium feed client-side. Link above instead.';
-      if (config.mediumHandle) {
-        const link = document.createElement('a');
-        link.href = `https://medium.com/@${config.mediumHandle}`;
-        link.textContent = `@${config.mediumHandle} on Medium`;
-        link.target = '_blank';
-        link.rel = 'noopener';
-        mediumFeed.appendChild(link);
-      }
-    }
+async function renderPost(article, post) {
+  const back = '<a class="post-back" href="/writings.html">← All writings</a>';
+  const md = post ? await loadText(`posts/${post.slug}.md`) : null;
+  if (!md) {
+    article.innerHTML = `
+      ${back}
+      <header class="post-header">
+        <h1>Post not found</h1>
+        <p class="post-subtitle">That post doesn't exist.</p>
+      </header>
+    `;
+    return;
   }
+
+  document.title = `${post.title} — Chaz Merritt`;
+  document.querySelector('meta[name="description"]')?.setAttribute('content', post.summary || '');
+  article.innerHTML = `
+    ${back}
+    <header class="post-header">
+      <h1>${post.title}</h1>
+      ${post.summary ? `<p class="post-subtitle">${post.summary}</p>` : ''}
+      <div class="meta">${formatPostDate(post.date)}</div>
+    </header>
+    <div class="post-body">${marked.parse(md)}</div>
+  `;
 }
 
 /* Gallery */
@@ -550,16 +561,16 @@ window.addEventListener('DOMContentLoaded', async () => {
   if (page === 'projects') {
     await renderProjects();
     const links = await loadJSON('data/cv.json', null);
-    if (links) updateFooterLinks({ email: links.contact?.email, github: links.links?.github, linkedin: links.links?.linkedin, medium: links.links?.medium });
+    if (links) updateFooterLinks({ email: links.contact?.email, github: links.links?.github, linkedin: links.links?.linkedin });
   }
   if (page === 'writings') {
     await renderWritings();
     const links = await loadJSON('data/cv.json', null);
-    if (links) updateFooterLinks({ email: links.contact?.email, github: links.links?.github, linkedin: links.links?.linkedin, medium: links.links?.medium });
+    if (links) updateFooterLinks({ email: links.contact?.email, github: links.links?.github, linkedin: links.links?.linkedin });
   }
   if (page === 'gallery') {
     await renderGallery();
     const links = await loadJSON('data/cv.json', null);
-    if (links) updateFooterLinks({ email: links.contact?.email, github: links.links?.github, linkedin: links.links?.linkedin, medium: links.links?.medium });
+    if (links) updateFooterLinks({ email: links.contact?.email, github: links.links?.github, linkedin: links.links?.linkedin });
   }
 });
