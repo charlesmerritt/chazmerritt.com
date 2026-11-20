@@ -388,6 +388,13 @@ async function renderPost(article, post) {
   const back = '<a class="post-back" href="/writings.html">← All writings</a>';
   const md = post ? await loadText(`posts/${post.slug}.md`) : null;
   if (!md) {
+    // A static host answers 200 here, so tell crawlers this is a 404 and not a copy of /writings
+    document.title = 'Post not found — Chaz Merritt';
+    document.querySelector('link[rel="canonical"]')?.remove();
+    const robots = document.createElement('meta');
+    robots.name = 'robots';
+    robots.content = 'noindex';
+    document.head.append(robots);
     article.innerHTML = `
       ${back}
       <header class="post-header">
