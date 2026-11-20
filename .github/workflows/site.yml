@@ -1,0 +1,38 @@
+name: Site checks
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: '17 9 * * 1' # Mondays, for outside links that rot on their own
+  workflow_dispatch:
+
+jobs:
+  checks:
+    # Deterministic: no network beyond checkout, so a red run means this repo changed
+    if: github.event_name != 'schedule'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Unit tests
+        run: npm test
+      - name: Generated files match posts/
+        run: node scripts/blog.mjs check
+      - name: Build dist/
+        run: npm run build
+      - name: Internal links
+        run: npm run links
+
+  outside-links:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Outside links and placeholders
+        run: npm run links -- --external

@@ -6,6 +6,7 @@
     "new": "node scripts/blog.mjs new",
     "index": "node scripts/blog.mjs index",
     "test": "node --test scripts/",
-    "build": "node scripts/build.mjs"
+    "build": "node scripts/build.mjs",
+    "links": "node scripts/linkcheck.mjs"
   }
 }

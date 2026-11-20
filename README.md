@@ -40,6 +40,14 @@ Published posts live at `/posts/<slug>`; old `/writings?post=<slug>` links forwa
 
 **One-time Cloudflare Pages setting** (Settings → Builds): build command `npm run build`, build output directory `dist`. Until that's set, Pages keeps serving the whole repo.
 
+## Checks
+
+- `npm test`: unit tests for the generators, link helpers, and publish allowlist
+- `npm run links`: every internal link lands on a published file
+- `npm run links -- --external`: also fetches outside links and fails on placeholder URLs
+
+`.github/workflows/site.yml` runs the first two, the generated-files check, and the build on every push; outside links run weekly (and on demand from the Actions tab), since other sites' outages shouldn't fail a push.
+
 ## Changing JS or CSS
 
 Cloudflare tells browsers to cache `.js` and `.css` for 4 hours, so after editing `assets/js/main.js` or `assets/css/style.css`, bump the `?v=` on their `<script>`/`<link>` tags in every `.html` page (e.g. `?v=20261014` → today's date). Otherwise returning visitors keep running the old files against the new data.

@@ -8,29 +8,15 @@
  *
  * Cloudflare Pages settings: build command `npm run build`, output directory `dist`.
  */
-import { cp, mkdir, readdir, rm } from 'node:fs/promises';
+import { cp, mkdir, rm } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { isPublic } from './lib/public-files.mjs';
+import { isPublic, listFiles } from './lib/public-files.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DIST = path.join(ROOT, 'dist');
 
-// Walk the tree rather than asking git, so the build doesn't depend on .git being present
-async function listFiles(dir = '') {
-  const out = [];
-  for (const entry of await readdir(path.join(ROOT, dir), { withFileTypes: true })) {
-    const rel = dir ? `${dir}/${entry.name}` : entry.name;
-    if (entry.isDirectory()) {
-      if (!['.git', 'dist', 'node_modules'].includes(entry.name)) out.push(...await listFiles(rel));
-    } else if (entry.isFile()) {
-      out.push(rel);
-    }
-  }
-  return out;
-}
-
-const all = await listFiles();
+const all = await listFiles(ROOT);
 const files = all.filter(isPublic);
 
 await rm(DIST, { recursive: true, force: true });
