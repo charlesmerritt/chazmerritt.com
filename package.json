@@ -4,6 +4,7 @@
   "scripts": {
     "dev": "node scripts/blog.mjs dev",
     "new": "node scripts/blog.mjs new",
-    "index": "node scripts/blog.mjs index"
+    "index": "node scripts/blog.mjs index",
+    "test": "node --test scripts/"
   }
 }

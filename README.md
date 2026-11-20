@@ -19,9 +19,14 @@ Needs Node; there are no dependencies to install.
    ```
 
    Don't repeat the title as a heading in the body; the page renders it. Put images in `posts/images/` and reference them relatively (`images/photo.jpg`), so they show in your editor's preview as well as on the site.
-4. To publish, delete `draft: true`, set `date`, then commit `posts/` together with `data/writings.json` and push.
+4. To publish, delete `draft: true`, set `date`, then commit `posts/` together with the generated files (below) and push.
 
-`data/writings.json` is generated from the front matter of published posts (`npm run dev` keeps it current, or run `npm run index`), because a static host can't list a folder. Don't edit it by hand. A pre-commit hook in `.githooks/` stops a commit whose staged copy is stale; enable it once per clone with `git config core.hooksPath .githooks`.
+Generated from the front matter of published posts, and committed because a static host can't list a folder or run a build:
+
+- `data/writings.json`: the Writings index
+- `feed.xml`: the RSS feed
+
+`npm run dev` keeps them current, or run `npm run index`. Don't edit them by hand. A pre-commit hook in `.githooks/` stops a commit whose staged copies are stale; enable it once per clone with `git config core.hooksPath .githooks`. `npm test` runs the generators' tests.
 
 Drafts never appear on the live site's list, but a committed draft's raw `.md` is still reachable by URL, so keep anything private uncommitted.
 

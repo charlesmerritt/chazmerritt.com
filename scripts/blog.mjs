@@ -5,11 +5,13 @@
  *
  *   node scripts/blog.mjs new "Post title"   scaffold posts/<slug>.md as a draft
  *   node scripts/blog.mjs dev [port]         preview server with drafts + live reload
- *   node scripts/blog.mjs index              regenerate data/writings.json
- *   node scripts/blog.mjs check              pre-commit: is the staged index current?
+ *   node scripts/blog.mjs index              regenerate the generated files below
+ *   node scripts/blog.mjs check              pre-commit: are the staged copies current?
  *
- * Each post's metadata lives in its front matter; data/writings.json is
- * generated from it (drafts excluded) because a static host can't list posts/.
+ * Each post's metadata lives in its front matter. Generated from it, drafts
+ * excluded, and committed (a static host can't list posts/ or run a build):
+ *   data/writings.json   the Writings index the browser renders
+ *   feed.xml             RSS feed
  */
 import { execFileSync } from 'node:child_process';
 import { existsSync, watch } from 'node:fs';
@@ -17,11 +19,16 @@ import { readdir, readFile, stat, writeFile } from 'node:fs/promises';
 import http from 'node:http';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { buildFeed } from './lib/feed.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const POSTS_DIR = path.join(ROOT, 'posts');
-const INDEX_FILE = path.join(ROOT, 'data', 'writings.json');
 const INDEX_REL = 'data/writings.json';
+const SITE = {
+  url: 'https://chazmerritt.com',
+  title: 'Chaz Merritt — Writings',
+  description: 'Writing by Chaz Merritt on research, forestry, machine learning, and more.',
+};
 
 /* Front matter: a deliberately small YAML subset (key: value, [a, b] lists, true/false) */
 const FRONT_MATTER = /^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/;
@@ -85,14 +92,31 @@ async function buildIndex({ drafts = false } = {}) {
     entries.push(entry);
   }
   entries.sort((a, b) => b.date.localeCompare(a.date) || a.slug.localeCompare(b.slug));
-  return { json: JSON.stringify(entries, null, 2) + '\n', count: entries.length, errors };
+  return { entries, json: JSON.stringify(entries, null, 2) + '\n', count: entries.length, errors };
 }
 
-async function writeIndex() {
-  const { json, count, errors } = await buildIndex();
-  const current = existsSync(INDEX_FILE) ? await readFile(INDEX_FILE, 'utf8') : '';
-  if (json !== current) await writeFile(INDEX_FILE, json);
-  return { changed: json !== current, count, errors };
+/* Every committed file generated from posts/, as { rel: content } */
+async function buildOutputs() {
+  const { entries, json, count, errors } = await buildIndex();
+  const files = {
+    [INDEX_REL]: json,
+    'feed.xml': buildFeed(entries, SITE),
+  };
+  return { files, count, errors };
+}
+
+async function writeOutputs() {
+  const { files, count, errors } = await buildOutputs();
+  const changed = [];
+  for (const [rel, content] of Object.entries(files)) {
+    const file = path.join(ROOT, rel);
+    const current = existsSync(file) ? await readFile(file, 'utf8') : '';
+    if (content !== current) {
+      await writeFile(file, content);
+      changed.push(rel);
+    }
+  }
+  return { changed, count, errors };
 }
 
 /* Commands */
@@ -120,24 +144,29 @@ async function cmdNew(title) {
 }
 
 async function cmdIndex() {
-  const { changed, count, errors } = await writeIndex();
+  const { changed, count, errors } = await writeOutputs();
   errors.forEach(e => console.error(`✗ ${e}`));
-  console.log(`${INDEX_REL}: ${count} published post${count === 1 ? '' : 's'}${changed ? ' (updated)' : ' (unchanged)'}`);
+  console.log(`${count} published post${count === 1 ? '' : 's'}; ${changed.length ? `updated ${changed.join(', ')}` : 'generated files unchanged'}`);
   if (errors.length) process.exit(1);
 }
 
-async function cmdCheck() {
-  const { json, errors } = await buildIndex();
-  let staged = '';
+function stagedCopy(rel) {
   try {
-    staged = execFileSync('git', ['show', `:${INDEX_REL}`], { cwd: ROOT, encoding: 'utf8' });
-  } catch {}
+    return execFileSync('git', ['show', `:${rel}`], { cwd: ROOT, encoding: 'utf8' });
+  } catch {
+    return '';
+  }
+}
+
+async function cmdCheck() {
+  const { files, errors } = await buildOutputs();
   if (errors.length) {
     errors.forEach(e => console.error(`✗ ${e}`));
     process.exit(1);
   }
-  if (json !== staged) {
-    console.error(`✗ ${INDEX_REL} doesn't match posts/. Run:\n\n    npm run index && git add ${INDEX_REL}\n`);
+  const stale = Object.keys(files).filter(rel => files[rel] !== stagedCopy(rel));
+  if (stale.length) {
+    console.error(`✗ ${stale.join(', ')} ${stale.length === 1 ? "doesn't" : "don't"} match posts/. Run:\n\n    npm run index && git add ${stale.join(' ')}\n`);
     process.exit(1);
   }
 }
@@ -222,20 +251,21 @@ async function cmdDev(port = 8000) {
     }
   });
 
-  // Keep the committed index in sync while writing, then reload open tabs
+  // Keep the committed generated files in sync while writing, then reload open tabs
+  const generated = new Set(Object.keys((await buildOutputs()).files).map(rel => path.normalize(rel)));
   let timer;
   await watchTree(ROOT, filename => {
-    if (filename === path.normalize(INDEX_REL) || filename.split(path.sep).some(p => p.startsWith('.'))) return;
+    if (generated.has(filename) || filename.split(path.sep).some(p => p.startsWith('.'))) return;
     clearTimeout(timer);
     timer = setTimeout(async () => {
-      const { changed, errors } = await writeIndex();
-      if (changed) console.log(`Updated ${INDEX_REL}`);
+      const { changed, errors } = await writeOutputs();
+      if (changed.length) console.log(`Updated ${changed.join(', ')}`);
       errors.forEach(e => console.warn(`✗ ${e}`));
       for (const client of clients) client.write('data: reload\n\n');
     }, 150);
   });
 
-  await writeIndex();
+  await writeOutputs();
   server.listen(port, '127.0.0.1', () => {
     console.log(`Previewing at http://localhost:${port}/writings.html (drafts included, reloads on save)`);
   });

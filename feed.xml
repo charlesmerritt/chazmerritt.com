@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Chaz Merritt — Writings</title>
+    <link>https://chazmerritt.com/writings.html</link>
+    <description>Writing by Chaz Merritt on research, forestry, machine learning, and more.</description>
+    <language>en-us</language>
+    <atom:link href="https://chazmerritt.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <lastBuildDate>Thu, 28 May 2026 12:00:00 GMT</lastBuildDate>
+    <item>
+      <title>LaTeX Is Easier Than You Think: A Guide to the Modern Writing Stack</title>
+      <link>https://chazmerritt.com/writings.html?post=latex-is-easier-than-you-think</link>
+      <guid isPermaLink="true">https://chazmerritt.com/writings.html?post=latex-is-easier-than-you-think</guid>
+      <pubDate>Thu, 28 May 2026 12:00:00 GMT</pubDate>
+      <description>LaTeX is no longer a niche tool for programmers.</description>
+      <category>science</category>
+      <category>academia</category>
+      <category>research</category>
+      <category>typesetting</category>
+      <category>writing-tips</category>
+    </item>
+    <item>
+      <title>Digging Away at the Self</title>
+      <link>https://chazmerritt.com/writings.html?post=digging-away-at-the-self</link>
+      <guid isPermaLink="true">https://chazmerritt.com/writings.html?post=digging-away-at-the-self</guid>
+      <pubDate>Thu, 19 Oct 2023 12:00:00 GMT</pubDate>
+      <description>Self-discovery through the words of Nobel laureate Seamus Heaney.</description>
+      <category>poetry</category>
+      <category>self-awareness</category>
+      <category>family</category>
+      <category>reflections</category>
+      <category>parents</category>
+    </item>
+  </channel>
+</rss>
