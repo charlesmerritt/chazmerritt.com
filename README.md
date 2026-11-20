@@ -25,6 +25,7 @@ Generated from the front matter of published posts, and committed because a stat
 
 - `data/writings.json`: the Writings index
 - `feed.xml`: the RSS feed
+- `sitemap.xml`: every page and post for search engines (add new top-level pages to `PAGES` in `scripts/blog.mjs`)
 
 `npm run dev` keeps them current, or run `npm run index`. Don't edit them by hand. A pre-commit hook in `.githooks/` stops a commit whose staged copies are stale; enable it once per clone with `git config core.hooksPath .githooks`. `npm test` runs the generators' tests.
 

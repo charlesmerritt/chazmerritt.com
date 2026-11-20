@@ -15,3 +15,5 @@ Disallow: /scripts/
 Disallow: /.githooks/
 Disallow: /package.json
 Disallow: /README.md
+
+Sitemap: https://chazmerritt.com/sitemap.xml

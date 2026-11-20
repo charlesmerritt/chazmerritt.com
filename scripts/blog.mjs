@@ -12,6 +12,7 @@
  * excluded, and committed (a static host can't list posts/ or run a build):
  *   data/writings.json   the Writings index the browser renders
  *   feed.xml             RSS feed
+ *   sitemap.xml          every page and post, for search engines
  */
 import { execFileSync } from 'node:child_process';
 import { existsSync, watch } from 'node:fs';
@@ -20,6 +21,7 @@ import http from 'node:http';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildFeed } from './lib/feed.mjs';
+import { buildSitemap } from './lib/sitemap.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const POSTS_DIR = path.join(ROOT, 'posts');
@@ -29,6 +31,9 @@ const SITE = {
   title: 'Chaz Merritt — Writings',
   description: 'Writing by Chaz Merritt on research, forestry, machine learning, and more.',
 };
+// Top-level pages, as their canonical URLs. Add new pages here so they reach the sitemap.
+const PAGES = ['/', '/projects.html', '/writings.html', '/gallery.html'];
+const postUrl = slug => `${SITE.url}/writings.html?post=${encodeURIComponent(slug)}`;
 
 /* Front matter: a deliberately small YAML subset (key: value, [a, b] lists, true/false) */
 const FRONT_MATTER = /^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/;
@@ -100,7 +105,11 @@ async function buildOutputs() {
   const { entries, json, count, errors } = await buildIndex();
   const files = {
     [INDEX_REL]: json,
-    'feed.xml': buildFeed(entries, SITE),
+    'feed.xml': buildFeed(entries, SITE, { postUrl }),
+    'sitemap.xml': buildSitemap([
+      ...PAGES.map(page => ({ loc: SITE.url + page })),
+      ...entries.map(post => ({ loc: postUrl(post.slug), lastmod: post.date })),
+    ]),
   };
   return { files, count, errors };
 }
