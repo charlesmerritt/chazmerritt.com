@@ -252,18 +252,42 @@ async function renderCV() {
   if (pubList && Array.isArray(cv.publications)) {
     pubList.classList.add('cards');
     pubList.classList.remove('list');
-    pubList.innerHTML = cv.publications.map(p => {
+    pubList.innerHTML = cv.publications.map((p, i) => {
       const title = p.link
         ? `<a href="${p.link}" target="_blank" rel="noopener">${p.title}</a>`
         : p.title;
       const meta = p.venue ? `${p.venue}${p.year ? ` (${p.year})` : ''}` : (p.year || '');
+      const actions = [
+        p.pdf ? `<a class="pub-action" href="${p.pdf}" target="_blank" rel="noopener">PDF</a>` : '',
+        p.link ? `<a class="pub-action" href="${p.link}" target="_blank" rel="noopener">${/doi\.org/.test(p.link) ? 'DOI' : 'Link'}</a>` : '',
+        p.bibtex ? `<button class="pub-action" type="button" data-bibtex="${i}">Copy BibTeX</button>` : '',
+      ].join('');
       return `
-        <li class="card">
+        <li class="card pub">
           <div class="title">${title}</div>
+          ${p.authors ? `<div class="pub-authors">${p.authors}</div>` : ''}
           ${meta ? `<div class="meta">${meta}</div>` : ''}
+          ${p.abstract ? `<details class="pub-abstract"><summary>Abstract</summary><p>${p.abstract}</p></details>` : ''}
+          ${actions ? `<div class="pub-actions">${actions}</div>` : ''}
         </li>
       `;
     }).join('');
+    pubList.addEventListener('click', async (e) => {
+      const btn = e.target instanceof Element ? e.target.closest('[data-bibtex]') : null;
+      if (!btn) return;
+      const text = cv.publications[Number(btn.dataset.bibtex)]?.bibtex || '';
+      try {
+        await navigator.clipboard.writeText(text);
+        btn.textContent = 'Copied';
+      } catch {
+        // Clipboard needs a secure context; fall back to showing the entry
+        btn.insertAdjacentHTML('afterend', `<pre class="pub-bibtex"></pre>`);
+        btn.nextElementSibling.textContent = text;
+        btn.remove();
+        return;
+      }
+      setTimeout(() => { btn.textContent = 'Copy BibTeX'; }, 1600);
+    });
   }
 
   // Presentations

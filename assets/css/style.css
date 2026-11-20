@@ -413,3 +413,16 @@ header, main, footer { position: relative; z-index: 1; }
 .notfound-links { margin-top: var(--space-6); grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); text-align: left; }
 .notfound-links .card { display: block; height: 100%; color: inherit; text-decoration: none; }
 .notfound-links .card .desc { margin: 0; font-size: var(--fs-0); }
+
+/* Publications */
+.pub-authors { font-size: var(--fs-0); margin-bottom: 2px; }
+.pub-abstract { margin-top: var(--space-2); font-size: var(--fs-0); }
+.pub-abstract summary { cursor: pointer; color: var(--muted); }
+.pub-abstract p { margin: var(--space-1) 0 0; line-height: 1.55; }
+.pub-actions { display: flex; flex-wrap: wrap; gap: var(--space-1); margin-top: var(--space-2); }
+.pub-action {
+  font: inherit; font-size: 13px; color: var(--fg); background: transparent; cursor: pointer;
+  border: 1px solid var(--border); border-radius: 999px; padding: 3px 10px; text-decoration: none;
+}
+.pub-action:hover { border-color: var(--accent); color: var(--accent); }
+.pub-bibtex { width: 100%; margin: var(--space-1) 0 0; padding: var(--space-2); font-size: 12px; overflow-x: auto; background: color-mix(in oklab, var(--fg) 6%, transparent); border-radius: 8px; }

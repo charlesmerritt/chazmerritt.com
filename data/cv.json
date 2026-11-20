@@ -59,8 +59,8 @@
     { "degree": "BA, Cognitive Science", "school": "University of Georgia", "period": "2020 — 2024" }
   ],
   "publications": [
-    { "title": "Stochastic Valuation of Pine Stands Using Monte Carlo Simulation", "venue": "Thesis", "year": 2026, "link": "https://www.proquest.com/docview/3352193448" },
-    { "title": "AI Technology Use in North American Forestry ", "venue": "Journal of Forestry", "year": 2026, "link": "https://doi.org/10.1007/s44392-026-00079-8" }
+    {"title": "Stochastic Valuation of Pine Stands Using Monte Carlo Simulation", "venue": "M.S. Thesis, University of Georgia", "year": 2026, "authors": "Charles Merritt", "link": "https://www.proquest.com/docview/3352193448", "abstract": "PLACEHOLDER: paste the thesis abstract here.", "bibtex": "@mastersthesis{merritt2026stochastic,\n  author = {Merritt, Charles},\n  title  = {Stochastic Valuation of Planted Loblolly Pine Stands Using Monte Carlo Simulation},\n  school = {University of Georgia},\n  year   = {2026},\n  url    = {https://www.proquest.com/docview/3352193448}\n}"},
+    {"title": "AI Technology Use in North American Forestry", "venue": "Journal of Forestry", "year": 2026, "authors": "PLACEHOLDER: author list", "link": "https://doi.org/10.1007/s44392-026-00079-8", "abstract": "PLACEHOLDER: paste the article abstract here.", "bibtex": "@article{merritt2026ai,\n  author  = {PLACEHOLDER: author list},\n  title   = {AI Technology Use in North American Forestry},\n  journal = {Journal of Forestry},\n  year    = {2026},\n  doi     = {10.1007/s44392-026-00079-8}\n}"}
   ],
   "presentations": [
     { "title": "Optimizing Timber Stands under Uncertainty", "venue": "Society of American Foresters Conference", "year": 2025, "link": "#" },
