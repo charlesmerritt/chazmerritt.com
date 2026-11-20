@@ -32,8 +32,9 @@ const SITE = {
   description: 'Writing by Chaz Merritt on research, forestry, machine learning, and more.',
 };
 // Top-level pages, as their canonical URLs. Add new pages here so they reach the sitemap.
-const PAGES = ['/', '/projects.html', '/writings.html', '/gallery.html'];
-const postUrl = slug => `${SITE.url}/writings.html?post=${encodeURIComponent(slug)}`;
+// Cloudflare Pages serves pages without .html (and 308-redirects the .html form).
+const PAGES = ['/', '/projects', '/writings', '/gallery'];
+const postUrl = slug => `${SITE.url}/writings?post=${encodeURIComponent(slug)}`;
 
 /* Front matter: a deliberately small YAML subset (key: value, [a, b] lists, true/false) */
 const FRONT_MATTER = /^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/;

@@ -13,7 +13,7 @@ function rfc822(date) {
   return new Date(`${date}T12:00:00Z`).toUTCString();
 }
 
-const defaultPostUrl = site => slug => `${site.url}/writings.html?post=${encodeURIComponent(slug)}`;
+const defaultPostUrl = site => slug => `${site.url}/writings?post=${encodeURIComponent(slug)}`;
 
 /**
  * @param {Array<{slug, title, date, summary, tags}>} posts newest first
@@ -40,7 +40,7 @@ export function buildFeed(posts, site, { postUrl = defaultPostUrl(site) } = {}) 
     '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">',
     '  <channel>',
     `    <title>${escapeXml(site.title)}</title>`,
-    `    <link>${escapeXml(`${site.url}/writings.html`)}</link>`,
+    `    <link>${escapeXml(`${site.url}/writings`)}</link>`,
     `    <description>${escapeXml(site.description)}</description>`,
     '    <language>en-us</language>',
     `    <atom:link href="${escapeXml(`${site.url}/feed.xml`)}" rel="self" type="application/rss+xml"/>`,

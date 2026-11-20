@@ -38,3 +38,9 @@ test('an empty blog still yields a valid channel', () => {
   assert.match(xml, /<channel>[\s\S]*<\/channel>/);
   assert.doesNotMatch(xml, /<item>|lastBuildDate/);
 });
+
+test('channel and default post links use extensionless URLs, as Cloudflare serves them', () => {
+  const xml = buildFeed(posts, SITE);
+  assert.match(xml, /<channel>\n    <title>[^<]*<\/title>\n    <link>https:\/\/chazmerritt.com\/writings<\/link>/);
+  assert.match(xml, /<link>https:\/\/chazmerritt.com\/writings\?post=newer<\/link>/);
+});
