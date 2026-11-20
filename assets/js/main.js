@@ -68,6 +68,7 @@ function updateFooterLinks(links) {
   if (links.email) parts.push(`<a href="mailto:${links.email}">Email</a>`);
   if (links.github) parts.push(`<a href="${links.github}" target="_blank" rel="noopener">GitHub</a>`);
   if (links.linkedin) parts.push(`<a href="${links.linkedin}" target="_blank" rel="noopener">LinkedIn</a>`);
+  if (links.researchgate) parts.push(`<a href="${links.researchgate}" target="_blank" rel="noopener">ResearchGate</a>`);
   footer.innerHTML = parts.join(' · ');
 }
 
@@ -212,7 +213,8 @@ async function renderCV() {
     updateFooterLinks({
       email: cv.contact?.email,
       github: cv.links?.github,
-      linkedin: cv.links?.linkedin
+      linkedin: cv.links?.linkedin,
+      researchgate: cv.links?.researchgate
     });
   }
 
@@ -575,16 +577,16 @@ window.addEventListener('DOMContentLoaded', async () => {
   if (page === 'projects') {
     await renderProjects();
     const links = await loadJSON('data/cv.json', null);
-    if (links) updateFooterLinks({ email: links.contact?.email, github: links.links?.github, linkedin: links.links?.linkedin });
+    if (links) updateFooterLinks({ email: links.contact?.email, github: links.links?.github, linkedin: links.links?.linkedin, researchgate: links.links?.researchgate });
   }
   if (page === 'writings') {
     await renderWritings();
     const links = await loadJSON('data/cv.json', null);
-    if (links) updateFooterLinks({ email: links.contact?.email, github: links.links?.github, linkedin: links.links?.linkedin });
+    if (links) updateFooterLinks({ email: links.contact?.email, github: links.links?.github, linkedin: links.links?.linkedin, researchgate: links.links?.researchgate });
   }
   if (page === 'gallery') {
     await renderGallery();
     const links = await loadJSON('data/cv.json', null);
-    if (links) updateFooterLinks({ email: links.contact?.email, github: links.links?.github, linkedin: links.links?.linkedin });
+    if (links) updateFooterLinks({ email: links.contact?.email, github: links.links?.github, linkedin: links.links?.linkedin, researchgate: links.links?.researchgate });
   }
 });
