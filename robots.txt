@@ -1,0 +1,17 @@
+# robots.txt for chazmerritt.com
+#
+# Cloudflare's managed robots.txt is prepended to this file at the edge. It sets
+# the Content-Signal (search=yes, ai-train=no) and blocks AI training crawlers,
+# so those rules live in the Cloudflare dashboard, not here.
+#
+# Keep /data/ and /posts/ crawlable: pages render from them in the browser, so a
+# search engine that can't fetch them sees empty pages.
+
+User-agent: *
+Allow: /
+
+# Repo tooling the deploy publishes but nobody should land on from search
+Disallow: /scripts/
+Disallow: /.githooks/
+Disallow: /package.json
+Disallow: /README.md

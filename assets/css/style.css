@@ -395,3 +395,21 @@ header, main, footer { position: relative; z-index: 1; }
 .lightbox-overlay.open { opacity: 1; visibility: visible; pointer-events: auto; }
 .lightbox-overlay.closing { opacity: 0; pointer-events: none; }
 .lightbox-overlay .backdrop { position: absolute; inset: 0; }
+
+/* 404 page */
+.notfound { text-align: center; max-width: 720px; }
+.notfound-code {
+  margin: var(--space-5) 0 0;
+  font-size: clamp(88px, 22vw, 168px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -4px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.notfound #notfound-path { overflow-wrap: anywhere; }
+.notfound-links { margin-top: var(--space-6); grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); text-align: left; }
+.notfound-links .card { display: block; height: 100%; color: inherit; text-decoration: none; }
+.notfound-links .card .desc { margin: 0; font-size: var(--fs-0); }

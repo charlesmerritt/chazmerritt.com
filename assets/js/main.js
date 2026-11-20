@@ -584,6 +584,12 @@ window.addEventListener('DOMContentLoaded', async () => {
     const links = await loadJSON('data/cv.json', null);
     if (links) updateFooterLinks({ email: links.contact?.email, github: links.links?.github, linkedin: links.links?.linkedin, researchgate: links.links?.researchgate });
   }
+  if (page === '404') {
+    const pathEl = document.getElementById('notfound-path');
+    if (pathEl) pathEl.textContent = window.location.pathname + window.location.search;
+    const links = await loadJSON('/data/cv.json', null);
+    if (links) updateFooterLinks({ email: links.contact?.email, github: links.links?.github, linkedin: links.links?.linkedin, researchgate: links.links?.researchgate });
+  }
   if (page === 'gallery') {
     await renderGallery();
     const links = await loadJSON('data/cv.json', null);
