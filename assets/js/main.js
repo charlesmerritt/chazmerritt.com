@@ -61,14 +61,24 @@ function initCursorOrb() {
   }, { passive: true });
 }
 
-function updateFooterLinks(links) {
+// Footer profile links, in display order; any key present in cv.json's links shows up
+const PROFILE_LABELS = {
+  github: 'GitHub',
+  linkedin: 'LinkedIn',
+  researchgate: 'ResearchGate',
+  orcid: 'ORCID',
+  scholar: 'Google Scholar',
+};
+
+function updateFooterLinks(cv) {
   const footer = document.getElementById('footer-links');
-  if (!footer) return;
+  if (!footer || !cv) return;
   const parts = [];
-  if (links.email) parts.push(`<a href="mailto:${links.email}">Email</a>`);
-  if (links.github) parts.push(`<a href="${links.github}" target="_blank" rel="noopener">GitHub</a>`);
-  if (links.linkedin) parts.push(`<a href="${links.linkedin}" target="_blank" rel="noopener">LinkedIn</a>`);
-  if (links.researchgate) parts.push(`<a href="${links.researchgate}" target="_blank" rel="noopener">ResearchGate</a>`);
+  if (cv.contact?.email) parts.push(`<a href="mailto:${cv.contact.email}">Email</a>`);
+  for (const [key, label] of Object.entries(PROFILE_LABELS)) {
+    const url = cv.links?.[key];
+    if (url) parts.push(`<a href="${url}" target="_blank" rel="noopener me">${label}</a>`);
+  }
   footer.innerHTML = parts.join(' · ');
 }
 
@@ -210,12 +220,7 @@ async function renderCV() {
       }
     }
 
-    updateFooterLinks({
-      email: cv.contact?.email,
-      github: cv.links?.github,
-      linkedin: cv.links?.linkedin,
-      researchgate: cv.links?.researchgate
-    });
+    updateFooterLinks(cv);
   }
 
   // Experience
@@ -578,22 +583,22 @@ window.addEventListener('DOMContentLoaded', async () => {
   if (page === 'projects') {
     await renderProjects();
     const links = await loadJSON('data/cv.json', null);
-    if (links) updateFooterLinks({ email: links.contact?.email, github: links.links?.github, linkedin: links.links?.linkedin, researchgate: links.links?.researchgate });
+    updateFooterLinks(links);
   }
   if (page === 'writings') {
     await renderWritings();
     const links = await loadJSON('data/cv.json', null);
-    if (links) updateFooterLinks({ email: links.contact?.email, github: links.links?.github, linkedin: links.links?.linkedin, researchgate: links.links?.researchgate });
+    updateFooterLinks(links);
   }
   if (page === '404') {
     const pathEl = document.getElementById('notfound-path');
     if (pathEl) pathEl.textContent = window.location.pathname + window.location.search;
     const links = await loadJSON('/data/cv.json', null);
-    if (links) updateFooterLinks({ email: links.contact?.email, github: links.links?.github, linkedin: links.links?.linkedin, researchgate: links.links?.researchgate });
+    updateFooterLinks(links);
   }
   if (page === 'gallery') {
     await renderGallery();
     const links = await loadJSON('data/cv.json', null);
-    if (links) updateFooterLinks({ email: links.contact?.email, github: links.links?.github, linkedin: links.links?.linkedin, researchgate: links.links?.researchgate });
+    updateFooterLinks(links);
   }
 });
