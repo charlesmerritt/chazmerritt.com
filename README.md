@@ -34,6 +34,12 @@ Drafts never appear on the live site's list, but a committed draft's raw `.md` i
 
 Published posts live at `/posts/<slug>`; old `/writings?post=<slug>` links forward there. Drafts have no static page and preview at `/writings?post=<slug>` under `npm run dev`. Both use the vendored [marked](https://github.com/markedjs/marked) in `assets/js/vendor/`.
 
+## Deploying
+
+`npm run build` copies only the public files into `dist/`, using the allowlist in `scripts/lib/public-files.mjs`: pages, `assets/`, `data/`, pre-rendered posts and their images, and the generated XML. The README, `scripts/`, `.githooks/`, `package.json`, and every `.md` post source, drafts included, stay out. A new kind of public file needs a rule there.
+
+**One-time Cloudflare Pages setting** (Settings → Builds): build command `npm run build`, build output directory `dist`. Until that's set, Pages keeps serving the whole repo.
+
 ## Changing JS or CSS
 
 Cloudflare tells browsers to cache `.js` and `.css` for 4 hours, so after editing `assets/js/main.js` or `assets/css/style.css`, bump the `?v=` on their `<script>`/`<link>` tags in every `.html` page (e.g. `?v=20261014` → today's date). Otherwise returning visitors keep running the old files against the new data.
