@@ -342,6 +342,10 @@ function formatPostDate(iso) {
   return new Date(`${iso}T00:00:00`).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 }
 
+function postPath(slug) {
+  return `/posts/${encodeURIComponent(slug)}`;
+}
+
 async function renderWritings() {
   const index = document.getElementById('writings-index');
   const list = document.getElementById('writings-list');
@@ -353,9 +357,15 @@ async function renderWritings() {
   index.hidden = Boolean(slug);
   article.hidden = !slug;
 
-  const posts = await loadJSON('data/writings.json', []);
+  const posts = await loadJSON('/data/writings.json', []);
   if (slug) {
-    await renderPost(article, posts.find(p => p.slug === slug));
+    const post = posts.find(p => p.slug === slug);
+    // Published posts have a static page; this view only previews drafts (npm run dev)
+    if (post && !post.draft) {
+      window.location.replace(postPath(post.slug));
+      return;
+    }
+    await renderPost(article, post);
     return;
   }
 
@@ -364,7 +374,7 @@ async function renderWritings() {
     const tags = Array.isArray(w.tags) ? w.tags.slice(0, 5).map(t => `<span class="pill">${t}</span>`).join('') : '';
     const tagRow = tags ? `<div class="tags">${tags}</div>` : '';
     return `
-      <a class="card" href="/writings.html?post=${encodeURIComponent(w.slug)}">
+      <a class="card" href="${w.draft ? `/writings?post=${encodeURIComponent(w.slug)}` : postPath(w.slug)}">
         <div class="title">${w.title}</div>
         <div class="meta">${formatPostDate(w.date)}${w.draft ? ' · Draft' : ''}</div>
         <p class="desc">${w.summary || ''}</p>
@@ -613,6 +623,9 @@ window.addEventListener('DOMContentLoaded', async () => {
     await renderWritings();
     const links = await loadJSON('data/cv.json', null);
     updateFooterLinks(links);
+  }
+  if (page === 'post') {
+    updateFooterLinks(await loadJSON('/data/cv.json', null));
   }
   if (page === '404') {
     const pathEl = document.getElementById('notfound-path');

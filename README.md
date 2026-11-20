@@ -26,12 +26,13 @@ Generated from the front matter of published posts, and committed because a stat
 - `data/writings.json`: the Writings index
 - `feed.xml`: the RSS feed
 - `sitemap.xml`: every page and post for search engines (add new top-level pages to `PAGES` in `scripts/blog.mjs`)
+- `posts/<slug>.html`: each post pre-rendered into a copy of `writings.html`, served at `/posts/<slug>`, so search engines and link previews see the full text. Editing `writings.html` (even a `?v=` bump) changes them, so run `npm run index` afterwards.
 
 `npm run dev` keeps them current, or run `npm run index`. Don't edit them by hand. A pre-commit hook in `.githooks/` stops a commit whose staged copies are stale; enable it once per clone with `git config core.hooksPath .githooks`. `npm test` runs the generators' tests.
 
 Drafts never appear on the live site's list, but a committed draft's raw `.md` is still reachable by URL, so keep anything private uncommitted.
 
-Posts render at `/writings.html?post=<slug>` in the browser via the vendored [marked](https://github.com/markedjs/marked) in `assets/js/vendor/`.
+Published posts live at `/posts/<slug>`; old `/writings?post=<slug>` links forward there. Drafts have no static page and preview at `/writings?post=<slug>` under `npm run dev`. Both use the vendored [marked](https://github.com/markedjs/marked) in `assets/js/vendor/`.
 
 ## Changing JS or CSS
 

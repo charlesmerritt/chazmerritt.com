@@ -13,15 +13,21 @@
  *   data/writings.json   the Writings index the browser renders
  *   feed.xml             RSS feed
  *   sitemap.xml          every page and post, for search engines
+ *   posts/<slug>.html    each post pre-rendered into a copy of writings.html
  */
 import { execFileSync } from 'node:child_process';
 import { existsSync, watch } from 'node:fs';
-import { readdir, readFile, stat, writeFile } from 'node:fs/promises';
+import { readdir, readFile, stat, unlink, writeFile } from 'node:fs/promises';
 import http from 'node:http';
+import { createRequire } from 'node:module';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildFeed } from './lib/feed.mjs';
 import { buildSitemap } from './lib/sitemap.mjs';
+import { renderPostPage } from './lib/post-page.mjs';
+
+// The same Markdown parser the browser uses for draft previews
+const { marked } = createRequire(import.meta.url)('../assets/js/vendor/marked.umd.js');
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const POSTS_DIR = path.join(ROOT, 'posts');
@@ -34,7 +40,8 @@ const SITE = {
 // Top-level pages, as their canonical URLs. Add new pages here so they reach the sitemap.
 // Cloudflare Pages serves pages without .html (and 308-redirects the .html form).
 const PAGES = ['/', '/projects', '/writings', '/gallery'];
-const postUrl = slug => `${SITE.url}/writings?post=${encodeURIComponent(slug)}`;
+const postUrl = slug => `${SITE.url}/posts/${encodeURIComponent(slug)}`;
+const POST_PAGE = /^posts\/[^/]+\.html$/;
 
 /* Front matter: a deliberately small YAML subset (key: value, [a, b] lists, true/false) */
 const FRONT_MATTER = /^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/;
@@ -112,6 +119,16 @@ async function buildOutputs() {
       ...entries.map(post => ({ loc: postUrl(post.slug), lastmod: post.date })),
     ]),
   };
+  const shell = await readFile(path.join(ROOT, 'writings.html'), 'utf8');
+  for (const post of entries) {
+    const md = await readFile(path.join(POSTS_DIR, `${post.slug}.md`), 'utf8');
+    files[`posts/${post.slug}.html`] = renderPostPage({
+      shell,
+      post,
+      bodyHtml: marked.parse(md.replace(FRONT_MATTER, '')),
+      url: postUrl(post.slug),
+    });
+  }
   return { files, count, errors };
 }
 
@@ -124,6 +141,14 @@ async function writeOutputs() {
     if (content !== current) {
       await writeFile(file, content);
       changed.push(rel);
+    }
+  }
+  // A post that was removed or turned back into a draft loses its page
+  for (const name of await readdir(POSTS_DIR)) {
+    const rel = `posts/${name}`;
+    if (POST_PAGE.test(rel) && !(rel in files)) {
+      await unlink(path.join(ROOT, rel));
+      changed.push(`${rel} (removed)`);
     }
   }
   return { changed, count, errors };
@@ -149,7 +174,7 @@ async function cmdNew(title) {
     '',
   ].join('\n'));
   console.log(`Created posts/${slug}.md (draft)`);
-  console.log(`Preview: npm run dev, then open /writings.html?post=${slug}`);
+  console.log(`Preview: npm run dev, then open /writings?post=${slug}`);
   console.log('Publish: remove "draft: true", set the date, and commit.');
 }
 
@@ -175,6 +200,8 @@ async function cmdCheck() {
     process.exit(1);
   }
   const stale = Object.keys(files).filter(rel => files[rel] !== stagedCopy(rel));
+  const tracked = execFileSync('git', ['ls-files', 'posts'], { cwd: ROOT, encoding: 'utf8' }).split('\n');
+  stale.push(...tracked.filter(rel => POST_PAGE.test(rel) && !(rel in files)));
   if (stale.length) {
     console.error(`✗ ${stale.join(', ')} ${stale.length === 1 ? "doesn't" : "don't"} match posts/. Run:\n\n    npm run index && git add ${stale.join(' ')}\n`);
     process.exit(1);
