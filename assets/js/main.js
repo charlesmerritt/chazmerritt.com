@@ -373,6 +373,7 @@ async function renderPost(article, post) {
   });
 
   document.title = `${post.title} — Chaz Merritt`;
+  document.querySelector('link[rel="canonical"]')?.setAttribute('href', `https://chazmerritt.com/writings.html?post=${encodeURIComponent(post.slug)}`);
   document.querySelector('meta[name="description"]')?.setAttribute('content', post.summary || '');
   article.innerHTML = `
     ${back}
